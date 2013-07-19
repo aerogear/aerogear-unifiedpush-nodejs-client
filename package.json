@@ -1,0 +1,31 @@
+{
+  "name": "aerogear-sender-client",
+  "version": "0.0.0",
+  "description": "Sender api for the AeroGear Unified Push server",
+  "homepage": "aerogear.org",
+  "bugs": "https://github.com/lholmquist/aerogear-sender-client/issues",
+  "author": {
+    "name": "Red Hat, Inc.",
+    "url": "http://aerogear.org"
+  },
+  "main": "lib/aerogear-sender-client",
+  "maintainers": {
+    "name": "Lucas Holmquist",
+    "email": "lholmqui@redhat.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lholmquist/aerogear-sender-client"
+  },
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+  ],
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.2.0",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-watch": "~0.2.0"
+  }
+}
