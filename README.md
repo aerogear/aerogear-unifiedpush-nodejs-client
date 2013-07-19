@@ -1,13 +1,15 @@
 # aerogear-sender-client [![Build Status](https://secure.travis-ci.org/lholmquist/aerogear-sender-client.png?branch=master)](http://travis-ci.org/lholmquist/aerogear-sender-client)
 
-Sender api for the AeroGear Unified Push server
+Node Sender API for the AeroGear Unified Push server
 
 ## Getting Started
 Install the module with: `npm install aerogear-sender-client`
 
 ```javascript
-var aerogear-sender-client = require('aerogear-sender-client');
-aerogear-sender-client.awesome(); // "awesome"
+var agSender = require( "aerogear-sender-client" ).AeroGear;
+agSender.sender( url ).broadcast( message, options ).on( "success", function( response ) {
+    console.log( "success called", response );
+});
 ```
 
 ## Documentation
@@ -21,6 +23,3 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 _(Nothing yet)_
-
-## License
-Copyright (c) 2013 Lucas Holmquist. Licensed under the apache license.
