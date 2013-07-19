@@ -3,7 +3,9 @@
 Node Sender API for the AeroGear Unified Push server
 
 ## Getting Started
-Install the module with: `npm install aerogear-sender-client`
+
+clone the repo, and in your project do `npm install path/to/aerogear-unified-push-node-client`
+
 
 ```javascript
 var agSender = require( "aerogear-sender-client" ).AeroGear;
