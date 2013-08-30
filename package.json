@@ -2,7 +2,7 @@
   "name": "aerogear-sender-client",
   "version": "0.0.0",
   "description": "Sender api for the AeroGear Unified Push server",
-  "homepage": "aerogear.org",
+  "homepage": "https://github.com/aerogear/aerogear-unifiedpush-nodejs-client",
   "author": {
     "name": "Red Hat, Inc.",
     "url": "http://aerogear.org"
@@ -14,7 +14,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lholmquist/aerogear-unified-push-node-client"
+    "url": "git@github.com:aerogear/aerogear-unifiedpush-nodejs-client.git"
+  },
+  "bugs": {
+    "url": "https://issues.jboss.org/browse/AGPUSH"
   },
   "licenses": [
     {
