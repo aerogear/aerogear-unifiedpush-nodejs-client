@@ -10,5 +10,6 @@
   "unused": true,
   "boss": true,
   "eqnull": true,
+  "trailing": true,
   "node": true
 }
