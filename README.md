@@ -8,7 +8,9 @@ clone the repo, and in your project do `npm install path/to/aerogear-unified-pus
 
 
 ```javascript
-var agSender = require( "aerogear-sender-client" ).AeroGear;
+var agSender = require( "aerogear-sender-client" ).AeroGear,
+    url = {};
+
 agSender.Sender( url ).broadcast( message, options ).on( "success", function( response ) {
     console.log( "success called", response );
 });
