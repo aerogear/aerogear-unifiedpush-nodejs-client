@@ -31,7 +31,8 @@
     "chai": "~1.7.2",
     "sinon": "~1.7.3",
     "sinon-chai": "~2.4.0",
-    "mocha": "~1.12.1"
+    "mocha": "~1.12.1",
+    "nock": "~0.22.1"
   },
   "scripts": {
     "test": "mocha"
