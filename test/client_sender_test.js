@@ -29,7 +29,7 @@ describe( "Sender", function() {
             expect( sender.sendTo ).to.exist;
         });
 
-        it( "Sender should have a URL contructed", function() {
+        it( "Sender should have a URL constructed", function() {
             var sender = AeroGear.Sender( "http://localhost:8080/ag-push" );
             expect( sender.getUrl() ).to.equal( "http://localhost:8080/ag-push/rest/sender/" );
         });
