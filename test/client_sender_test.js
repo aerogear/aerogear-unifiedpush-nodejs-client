@@ -30,22 +30,14 @@ describe( "Sender", function() {
         });
 
         it( "Sender should have a URL contructed", function() {
-            var sender = AeroGear.Sender(
-                {
-                    baseURL: "http://localhost:8080/ag-push",
-                    endpoint: "/sender"
-                });
-            expect( sender.getUrl() ).to.equal( "http://localhost:8080/ag-push/sender" );
+            var sender = AeroGear.Sender( "http://localhost:8080/ag-push" );
+            expect( sender.getUrl() ).to.equal( "http://localhost:8080/ag-push/rest/sender/" );
         });
     });
 });
 
 describe( "Sender Broadcast", function() {
-    var sender = AeroGear.Sender(
-                {
-                    baseURL: "http://localhost:8080/ag-push",
-                    endpoint: "/sender/"
-                }),
+    var sender = AeroGear.Sender( "http://localhost:8080/ag-push" ),
             applicationID = "12345",
             masterSecret = "54321",
             settings = {},
@@ -63,7 +55,7 @@ describe( "Sender Broadcast", function() {
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
             .matchHeader('Content-type', 'application/json')
-            .post( "/ag-push/sender/broadcast" )
+            .post( "/ag-push/rest/sender/broadcast" )
             .reply( 200,{} );
 
             settings.applicationID = applicationID;
@@ -79,7 +71,7 @@ describe( "Sender Broadcast", function() {
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
             .matchHeader('Content-type', 'application/json')
-            .post( "/ag-push/sender/broadcast" ).reply( 400,{} );
+            .post( "/ag-push/rest/sender/broadcast" ).reply( 400,{} );
 
             settings.applicationID = applicationID;
             settings.masterSecret = masterSecret;
@@ -93,11 +85,7 @@ describe( "Sender Broadcast", function() {
 });
 
 describe( "Sender - sendTo", function() {
-    var sender = AeroGear.Sender(
-                {
-                    baseURL: "http://localhost:8080/ag-push",
-                    endpoint: "/sender/"
-                }),
+    var sender = AeroGear.Sender( "http://localhost:8080/ag-push" ),
             applicationID = "12345",
             masterSecret = "54321",
             settings = {},
@@ -115,7 +103,7 @@ describe( "Sender - sendTo", function() {
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
             .matchHeader('Content-type', 'application/json')
-            .post( "/ag-push/sender/selected" )
+            .post( "/ag-push/rest/sender/selected" )
             .reply( 200,{} );
 
             settings.applicationID = applicationID;
@@ -131,7 +119,7 @@ describe( "Sender - sendTo", function() {
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
             .matchHeader('Content-type', 'application/json')
-            .post( "/ag-push/sender/selected" ).reply( 400,{} );
+            .post( "/ag-push/rest/sender/selected" ).reply( 400,{} );
 
             settings.applicationID = applicationID;
             settings.masterSecret = masterSecret;
