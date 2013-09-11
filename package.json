@@ -26,8 +26,6 @@
     }
   ],
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.2.0",
-    "grunt-contrib-watch": "~0.2.0",
     "chai": "~1.7.2",
     "sinon": "~1.7.3",
     "sinon-chai": "~2.4.0",
