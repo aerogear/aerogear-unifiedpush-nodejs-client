@@ -4,26 +4,47 @@ Node Sender API for the AeroGear Unified Push server
 
 ## Getting Started
 
-clone the repo, and in your project do `npm install path/to/aerogear-unified-push-node-client`
+### Pre Reqs:
+* node.js
+* npm
+* git
+
+### Building
+
+clone and install:
+
+    $ git@github.com:aerogear/aerogear-unifiedpush-nodejs-client.git
+
+    $ cd aerogear-unifiedpush-nodejs-client
+
+    $ npm install
+
+### Running Tests
+
+    $ npm test
 
 
-```javascript
-var agSender = require( "aerogear-sender-client" ).AeroGear,
-    url = "http://localhost:8080/ag-push";
+### Add to a Project
 
-agSender.Sender( url ).broadcast( message, options ).on( "success", function( response ) {
-    console.log( "success called", response );
-});
-```
-
-## Documentation
-_(Coming soon)_
+In your project do `npm install path/to/aerogear-unified-push-node-client`
 
 ## Examples
-_(Coming soon)_
 
-## Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
+Require the `aerogear-sender-client` library
 
-## Release History
-_(Nothing yet)_
+    var agSender = require( "aerogear-sender-client" ).AeroGear,
+        url = "http://localhost:8080/ag-push";
+
+Send a Broadcast Message
+
+    agSender.Sender( url ).broadcast( message, settings ).on( "success", function( response ) {
+        console.log( "success called", response );
+    });
+
+Send a Selective Message
+
+
+    agSender.Sender( url ).sendTo( criteria, message, settings ).on( "success", function( response ) {
+        console.log( "success called", response );
+    });
+
