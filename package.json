@@ -1,6 +1,6 @@
 {
   "name": "aerogear-sender-client",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Sender api for the AeroGear Unified Push server",
   "homepage": "https://github.com/aerogear/aerogear-unifiedpush-nodejs-client",
   "author": {
