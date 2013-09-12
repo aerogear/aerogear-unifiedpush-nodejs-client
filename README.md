@@ -1,4 +1,4 @@
-# aerogear-sender-client [![Build Status](https://secure.travis-ci.org/lholmquist/aerogear-sender-client.png?branch=master)](http://travis-ci.org/lholmquist/aerogear-sender-client)
+# aerogear-sender-client [![Build Status](https://secure.travis-ci.org/aerogear/aerogear-unifiedpush-nodejs-client.png?branch=master)](https://travis-ci.org/aerogear/aerogear-unifiedpush-nodejs-client)
 
 Node Sender API for the AeroGear Unified Push server
 
@@ -26,7 +26,17 @@ clone and install:
 
 ### Add to a Project
 
-In your project do `npm install path/to/aerogear-unified-push-node-client`
+In your project do
+
+    npm install path/to/aerogear-unified-push-node-client
+
+or
+
+install from npm
+
+    npm install aerogear-sender-client
+
+
 
 ## Examples
 
