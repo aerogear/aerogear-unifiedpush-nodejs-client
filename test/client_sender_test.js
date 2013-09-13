@@ -131,3 +131,153 @@ describe( "Sender - sendTo", function() {
         });
     });
 });
+
+describe( "Sender - Handle Moved Status Codes", function() {
+    var sender = AeroGear.Sender( "http://localhost:8080/ag-push" ),
+            applicationID = "12345",
+            masterSecret = "54321",
+            settings = {},
+            message = {};
+
+    beforeEach( function() {
+        settings = {};
+        message = {};
+    });
+
+
+    describe( "Endpoint returns moved", function() {
+        it( "broadcast should be called with success", function( done ) {
+
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/broadcast" )
+            .reply( 302,{},{'location': "http://localhost:8080/rest/new/sender"} )
+            .post( "/rest/new/sender" )
+            .reply( 200, {} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+
+            sender.broadcast( message, settings ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+
+    describe( "Endpoint returns moved, with no new location", function() {
+        it( "broadcast should be called with error", function( done ) {
+
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/broadcast" )
+            .reply( 302,{},{} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+
+            sender.broadcast( message, settings ).on( "error", function( error ) {
+                expect( error ).to.be.ok;
+                expect( error ).to.equal( "redirect url is not available" );
+                done();
+            });
+        });
+    });
+
+    // describe( "Endpoint returns moved", function() {
+    //     it( "sendTo should be called with success", function( done ) {
+
+    //         nock( "http://localhost:8080" )
+    //         .matchHeader('Accept', 'application/json')
+    //         .matchHeader('Content-type', 'application/json')
+    //         .post( "/ag-push/rest/sender/selected" )
+    //         .reply( 302,{},{'location': "http://localhost:8080/rest/new/sender"} )
+    //         .post( "/rest/new/sender" )
+    //         .reply( 200, {} );
+
+    //         settings.applicationID = applicationID;
+    //         settings.masterSecret = masterSecret;
+
+    //         sender.sendTo( message, settings ).on( "success", function( response ) {
+    //             expect( response ).to.be.ok;
+    //             done();
+    //         });
+    //     });
+    // });
+
+    // describe( "Endpoint returns moved, with no new location", function() {
+    //     it( "sendTo should be called with error", function( done ) {
+
+    //         nock( "http://localhost:8080" )
+    //         .matchHeader('Accept', 'application/json')
+    //         .matchHeader('Content-type', 'application/json')
+    //         .post( "/ag-push/rest/sender/selected" )
+    //         .reply( 302,{},{} );
+
+    //         settings.applicationID = applicationID;
+    //         settings.masterSecret = masterSecret;
+
+    //         sender.sendTo( message, settings ).on( "error", function( error ) {
+    //             expect( error ).to.be.ok;
+    //             expect( error ).to.equal( "redirect url is not available" );
+    //             done();
+    //         });
+    //     });
+    // });
+});
+
+describe( "Sender - Handle Moved Status Codes", function() {
+    var sender = AeroGear.Sender( "http://localhost:8080/ag-push" ),
+            applicationID = "12345",
+            masterSecret = "54321",
+            settings = {},
+            message = {};
+
+    beforeEach( function() {
+        settings = {};
+        message = {};
+    });
+
+    describe( "Endpoint returns moved", function() {
+        it( "sendTo should be called with success", function( done ) {
+
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/selected" )
+            .reply( 302,{},{'location': "http://localhost:8080/rest/new/sender"} )
+            .post( "/rest/new/sender" )
+            .reply( 200, {} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+
+            sender.sendTo( message, settings ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+
+    describe( "Endpoint returns moved, with no new location", function() {
+        it( "sendTo should be called with error", function( done ) {
+
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/selected" )
+            .reply( 302,{},{} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+
+            sender.sendTo( message, settings ).on( "error", function( error ) {
+                expect( error ).to.be.ok;
+                expect( error ).to.equal( "redirect url is not available" );
+                done();
+            });
+        });
+    });
+});
