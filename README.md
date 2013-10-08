@@ -45,16 +45,10 @@ Require the `aerogear-sender-client` library
     var agSender = require( "aerogear-sender-client" ).AeroGear,
         url = "http://localhost:8080/ag-push";
 
-Send a Broadcast Message
-
-    agSender.Sender( url ).broadcast( message, settings ).on( "success", function( response ) {
-        console.log( "success called", response );
-    });
-
 Send a Selective Message
 
 
-    agSender.Sender( url ).sendTo( criteria, message, settings ).on( "success", function( response ) {
+    agSender.Sender( url ).send( message, settings ).on( "success", function( response ) {
         console.log( "success called", response );
     });
 
