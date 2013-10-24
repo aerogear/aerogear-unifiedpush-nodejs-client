@@ -11,11 +11,13 @@ message = {
 
 settings = {
     applicationID: "aa3cfaad-8cd4-4b3c-af23-08417b879d00",
-    masterSecret: "SHHHHHH",
+    masterSecret: "shhh",
+    ttl: 3600,
+    "simple-push": {
+        "broadcast": "version="+ new Date().getTime() + ""
+    },
     criteria: {
-        "simple-push": {
-            "broadcast": "version="+ new Date().getTime() + ""
-        }
+        variants: [ "1234", "56788" ]
     }
 };
 
