@@ -45,7 +45,7 @@ Require the `aerogear-sender-client` library
     var agSender = require( "aerogear-sender-client" ).AeroGear,
         url = "http://localhost:8080/ag-push";
 
-Send a Selective Message
+Send a Message
 
 
     agSender.Sender( url ).send( message, settings ).on( "success", function( response ) {

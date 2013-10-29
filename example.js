@@ -3,19 +3,21 @@ var agSender = require( "./lib/aerogear-sender-client" ).AeroGear,
     message,
     settings;
 
-//Send a Selective Message
+//Send a Message
 
 message = {
-    alert: "Hi"
+    alert: "Hi",
+    sound: "default",
+    badge: 2,
+    someKey: "some value",
+    anotherCustomKey: "some other value"
 };
 
 settings = {
     applicationID: "aa3cfaad-8cd4-4b3c-af23-08417b879d00",
     masterSecret: "shhh",
     ttl: 3600,
-    "simple-push": {
-        "broadcast": "version="+ new Date().getTime() + ""
-    },
+    "simple-push": "version=123",
     criteria: {
         variants: [ "1234", "56788" ]
     }
