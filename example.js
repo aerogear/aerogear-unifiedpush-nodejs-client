@@ -19,7 +19,8 @@ settings = {
     ttl: 3600,
     "simple-push": "version=123",
     criteria: {
-        variants: [ "1234", "56788" ]
+        variants: [ "1234", "56788" ],
+        categories: [ "category1", "category2" ]
     }
 };
 
