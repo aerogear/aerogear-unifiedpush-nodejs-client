@@ -85,6 +85,102 @@ describe( "Sender - send", function() {
     });
 });
 
+describe( "Sender - send", function() {
+    var sender = AeroGear.Sender( url ),
+            applicationID = "12345",
+            masterSecret = "54321",
+            settings = {},
+            message = {};
+
+    beforeEach( function() {
+        settings = {};
+        message = {};
+    });
+
+
+    describe( "send Method", function() {
+        it( "send should be called with success and 'emit' success with callback as an object", function( done ) {
+
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/" )
+            .reply( 200,{} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+
+            sender.send( message, settings, {} ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+
+        it( "send should be called with error and 'emit' error with a callback as an object", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/" ).reply( 400,{} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+
+            sender.send( message, settings, {} ).on( "error", function( error ) {
+                expect( error ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
+describe( "Sender - send", function() {
+    var sender = AeroGear.Sender( url ),
+            applicationID = "12345",
+            masterSecret = "54321",
+            settings = {},
+            message = {};
+
+    beforeEach( function() {
+        settings = {};
+        message = {};
+    });
+
+
+    describe( "send Method with callback", function() {
+        it( "send should be called with success", function( done ) {
+
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/" )
+            .reply( 200,{} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+
+            sender.send( message, settings, function( err, response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+
+        it( "send should be called with error", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/" ).reply( 400,{} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+
+            sender.send( message, settings, function( err ) {
+                expect( err ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
 describe( "Sender", function() {
     var sender = AeroGear.Sender( url ),
             applicationID = "12345",

@@ -32,3 +32,12 @@ agSender.Sender( url ).send( message, settings )
         console.log( err );
     });
 
+
+// Or you can use just the callback
+agSender.Sender( url ).send( message, settings, function( err, response ) {
+    if( err ) {
+        console.log( err );
+        return;
+    }
+    console.log( "success called", response );
+});
