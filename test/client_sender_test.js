@@ -55,6 +55,7 @@ describe( "Sender - send", function() {
 
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
             .post( "/ag-push/rest/sender/" )
             .reply( 200,{} );
@@ -71,6 +72,7 @@ describe( "Sender - send", function() {
         it( "send should be called with error", function( done ) {
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
             .post( "/ag-push/rest/sender/" ).reply( 400,{} );
 
@@ -103,6 +105,7 @@ describe( "Sender - send", function() {
 
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
             .post( "/ag-push/rest/sender/" )
             .reply( 200,{} );
@@ -119,6 +122,7 @@ describe( "Sender - send", function() {
         it( "send should be called with error and 'emit' error with a callback as an object", function( done ) {
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
             .post( "/ag-push/rest/sender/" ).reply( 400,{} );
 
@@ -151,6 +155,7 @@ describe( "Sender - send", function() {
 
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
             .post( "/ag-push/rest/sender/" )
             .reply( 200,{} );
@@ -167,6 +172,7 @@ describe( "Sender - send", function() {
         it( "send should be called with error", function( done ) {
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
             .post( "/ag-push/rest/sender/" ).reply( 400,{} );
 
@@ -225,6 +231,7 @@ describe( "Sender - Handle Moved Status Codes", function() {
 
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
             .post( "/ag-push/rest/sender/" )
             .reply( 302,{},{'location': "http://localhost:8080/rest/new/sender"} )
@@ -246,6 +253,7 @@ describe( "Sender - Handle Moved Status Codes", function() {
 
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
             .post( "/ag-push/rest/sender/" )
             .reply( 302,{},{} );
