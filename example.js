@@ -17,7 +17,7 @@ settings = {
     applicationID: "aa3cfaad-8cd4-4b3c-af23-08417b879d00",
     masterSecret: "shhh",
     ttl: 3600,
-    "simple-push": "version=123",
+    simplePush: "version=123",
     criteria: {
         variants: [ "1234", "56788" ],
         categories: [ "category1", "category2" ]

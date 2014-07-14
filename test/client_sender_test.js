@@ -1,5 +1,6 @@
 var chai = require( "chai" ),
     sinonChai = require( "sinon-chai" ),
+    sinon = require( "sinon" ),
     nock = require( "nock" ),
     expect = require( "chai" ).expect,
     AeroGear = require( "../lib/aerogear-sender-client" ).AeroGear,
@@ -264,6 +265,148 @@ describe( "Sender - Handle Moved Status Codes", function() {
             sender.send( message, settings ).on( "error", function( error ) {
                 expect( error ).to.be.ok;
                 expect( error ).to.equal( "redirect url is not available" );
+                done();
+            });
+        });
+    });
+});
+
+
+describe( "Sender - Message Params", function() {
+    var sender = AeroGear.Sender( url ),
+            applicationID = "12345",
+            masterSecret = "54321",
+            settings = {},
+            message = {};
+
+    beforeEach( function() {
+        settings = {};
+        message = {};
+    });
+
+
+    describe( "Message params", function() {
+        it( "send should be called with success with a proper message constructed", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                message: {
+                    alert: "Hi",
+                    sound: "default",
+                    badge: 2
+                }
+            })
+            .reply( 200,{} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+
+            message = {
+                alert: "Hi",
+                sound: "default",
+                badge: 2
+            };
+
+            sender.send( message, settings ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
+
+describe( "Sender - Message Params", function() {
+    var sender = AeroGear.Sender( url ),
+            applicationID = "12345",
+            masterSecret = "54321",
+            settings = {},
+            message = {};
+
+    beforeEach( function() {
+        settings = {};
+        message = {};
+    });
+
+    describe( "Message params", function() {
+        it( "send should be called with success with a proper message constructed for actionCategory and contentAvailable", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                message: {
+                    alert: "Hi",
+                    sound: "default",
+                    badge: 2,
+                    "action-category": "action",
+                    "content-available": true
+                }
+            })
+            .reply( 200,{} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+
+            message = {
+                alert: "Hi",
+                sound: "default",
+                badge: 2,
+                actionCategory: "action",
+                contentAvailable: true
+            };
+
+            sender.send( message, settings ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
+
+describe( "Sender - Message Params", function() {
+    var sender = AeroGear.Sender( url ),
+            applicationID = "12345",
+            masterSecret = "54321",
+            settings = {},
+            message = {};
+
+    beforeEach( function() {
+        settings = {};
+        message = {};
+    });
+
+    describe( "Message params", function() {
+        it( "send should be called with success with a proper message constructed for actionCategory and contentAvailable", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                "simple-push":"version=1",
+                message: {
+                    alert: "Hi",
+                    sound: "default",
+                    badge: 2
+                }
+            })
+            .reply( 200,{} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+            settings.simplePush = 'version=1';
+
+            message = {
+                alert: "Hi",
+                sound: "default",
+                badge: 2
+            };
+
+            sender.send( message, settings ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
                 done();
             });
         });
