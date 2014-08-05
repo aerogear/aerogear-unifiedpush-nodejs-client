@@ -31,7 +31,7 @@ describe( "Sender", function() {
             expect( sender.getUrl() ).to.equal( "http://localhost:8080/ag-push/rest/sender/" );
         });
         it( "Sender should have a URL constructed", function() {
-            var sender = AeroGear.Sender( url );
+            var sender = AeroGear.Sender( otherUrl );
             expect( sender.getUrl() ).to.equal( "http://localhost:8080/ag-push/rest/sender/" );
         });
     });
