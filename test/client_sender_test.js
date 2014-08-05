@@ -4,7 +4,8 @@ var chai = require( "chai" ),
     nock = require( "nock" ),
     expect = require( "chai" ).expect,
     AeroGear = require( "../lib/unifiedpush-node-sender" ).AeroGear,
-    url = "http://localhost:8080/ag-push";
+    url = "http://localhost:8080/ag-push",
+    otherUrl = "http://localhost:8080/ag-push/";
 
 chai.use( sinonChai );
 
@@ -25,6 +26,10 @@ describe( "Sender", function() {
             expect( sender.send ).to.exist;
         });
 
+        it( "Sender should have a URL constructed", function() {
+            var sender = AeroGear.Sender( url );
+            expect( sender.getUrl() ).to.equal( "http://localhost:8080/ag-push/rest/sender/" );
+        });
         it( "Sender should have a URL constructed", function() {
             var sender = AeroGear.Sender( url );
             expect( sender.getUrl() ).to.equal( "http://localhost:8080/ag-push/rest/sender/" );
