@@ -1,4 +1,4 @@
-var agSender = require( "./lib/aerogear-sender-client" ).AeroGear,
+var agSender = require( "./lib/unifiedpush-node-sender" ).AeroGear,
     url = "http://localhost:8080/ag-push",
     message,
     settings;

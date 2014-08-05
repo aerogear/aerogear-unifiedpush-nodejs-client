@@ -3,7 +3,7 @@ var chai = require( "chai" ),
     sinon = require( "sinon" ),
     nock = require( "nock" ),
     expect = require( "chai" ).expect,
-    AeroGear = require( "../lib/aerogear-sender-client" ).AeroGear,
+    AeroGear = require( "../lib/unifiedpush-node-sender" ).AeroGear,
     url = "http://localhost:8080/ag-push";
 
 chai.use( sinonChai );

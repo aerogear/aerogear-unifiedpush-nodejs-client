@@ -1,5 +1,5 @@
 {
-  "name": "aerogear-sender-client",
+  "name": "unifiedpush-node-sender",
   "version": "0.6.0-dev",
   "description": "Sender api for the AeroGear Unified Push server",
   "homepage": "https://github.com/aerogear/aerogear-unifiedpush-nodejs-client",
@@ -7,7 +7,7 @@
     "name": "Red Hat, Inc.",
     "url": "http://aerogear.org"
   },
-  "main": "lib/aerogear-sender-client",
+  "main": "lib/unifiedpush-node-sender",
   "maintainers": {
     "name": "Lucas Holmquist",
     "email": "lholmqui@redhat.com"
