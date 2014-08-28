@@ -42,7 +42,7 @@ install from npm
 
 Require the `unifiedpush-node-sender` library
 
-    var agSender = require( "unifiedpush-node-sender" ).AeroGear,
+    var agSender = require( "unifiedpush-node-sender" ),
         url = "http://localhost:8080/ag-push";
 
 ### Send a Message

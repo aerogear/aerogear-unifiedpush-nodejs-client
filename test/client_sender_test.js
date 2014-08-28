@@ -3,7 +3,7 @@ var chai = require( "chai" ),
     sinon = require( "sinon" ),
     nock = require( "nock" ),
     expect = require( "chai" ).expect,
-    AeroGear = require( "../lib/unifiedpush-node-sender" ).AeroGear,
+    AeroGear = require( "../lib/unifiedpush-node-sender" ),
     url = "http://localhost:8080/ag-push",
     otherUrl = "http://localhost:8080/ag-push/";
 
