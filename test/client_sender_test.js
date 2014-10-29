@@ -11,47 +11,68 @@ chai.use( sinonChai );
 
 describe( "Sender", function() {
     describe( "Create", function() {
+        var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        };
+
         it( "Sender should be an object", function() {
-            var sender = AeroGear.Sender( url );
+            var sender = AeroGear.Sender( settings );
             expect( sender ).to.be.an( "object" );
         });
 
         it( "Sender should inherit events", function() {
-            var sender = AeroGear.Sender( url );
+            var sender = AeroGear.Sender( settings );
             expect( sender.emit ).to.exist;
         });
 
         it( "Sender should have a send method", function() {
-            var sender = AeroGear.Sender( url );
+            var sender = AeroGear.Sender( settings );
             expect( sender.send ).to.exist;
         });
 
         it( "Sender should have a URL constructed", function() {
-            var sender = AeroGear.Sender( url );
+            var sender = AeroGear.Sender( settings );
             expect( sender.getUrl() ).to.equal( "http://localhost:8080/ag-push/rest/sender/" );
         });
         it( "Sender should have a URL constructed", function() {
-            var sender = AeroGear.Sender( otherUrl );
+            settings.url = "http://localhost:8080/ag-push/";
+            var sender = AeroGear.Sender( settings );
             expect( sender.getUrl() ).to.equal( "http://localhost:8080/ag-push/rest/sender/" );
         });
     });
 
     describe( "Create", function() {
-        it( "Sender should throw an error", function() {
+        var settings = {};
+
+        it( "Sender should throw an error with nothing passed in", function() {
             expect( function(){ AeroGear.Sender(); } ).to.throw( "UnifiedPushSenderError" );
         });
+
+        it( "Sender should throw an error missing applicationId and masterSecret", function() {
+            settings.url = 'http://localhost';
+            expect( function(){ AeroGear.Sender(settings); } ).to.throw( "UnifiedPushSenderError" );
+        });
+
+        it( "Sender should throw an error missing masterSecret", function() {
+            settings.applicationId = '12345';
+            expect( function(){ AeroGear.Sender(settings); } ).to.throw( "UnifiedPushSenderError" );
+        });
     });
 });
 
 describe( "Sender - send", function() {
-    var sender = AeroGear.Sender( url ),
-            applicationID = "12345",
-            masterSecret = "54321",
-            settings = {},
-            message = {};
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        message = {};
 
     beforeEach( function() {
-        settings = {};
+        //settings = {};
         message = {};
     });
 
@@ -66,10 +87,7 @@ describe( "Sender - send", function() {
             .post( "/ag-push/rest/sender/" )
             .reply( 200,{} );
 
-            settings.applicationID = applicationID;
-            settings.masterSecret = masterSecret;
-
-            sender.send( message, settings ).on( "success", function( response ) {
+            sender.send( message, {} ).on( "success", function( response ) {
                 expect( response ).to.be.ok;
                 done();
             });
@@ -82,10 +100,7 @@ describe( "Sender - send", function() {
             .matchHeader('Content-type', 'application/json')
             .post( "/ag-push/rest/sender/" ).reply( 400,{} );
 
-            settings.applicationID = applicationID;
-            settings.masterSecret = masterSecret;
-
-            sender.send( message, settings ).on( "error", function( error ) {
+            sender.send( message, {} ).on( "error", function( error ) {
                 expect( error ).to.be.ok;
                 done();
             });
@@ -94,69 +109,20 @@ describe( "Sender - send", function() {
 });
 
 describe( "Sender - send", function() {
-    var sender = AeroGear.Sender( url ),
-            applicationID = "12345",
-            masterSecret = "54321",
-            settings = {},
-            message = {};
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        message = {};
 
     beforeEach( function() {
-        settings = {};
         message = {};
     });
 
 
-    describe( "send Method", function() {
-        it( "send should be called with success and 'emit' success with callback as an object", function( done ) {
-
-            nock( "http://localhost:8080" )
-            .matchHeader('Accept', 'application/json')
-            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
-            .matchHeader('Content-type', 'application/json')
-            .post( "/ag-push/rest/sender/" )
-            .reply( 200,{} );
-
-            settings.applicationID = applicationID;
-            settings.masterSecret = masterSecret;
-
-            sender.send( message, settings, {} ).on( "success", function( response ) {
-                expect( response ).to.be.ok;
-                done();
-            });
-        });
-
-        it( "send should be called with error and 'emit' error with a callback as an object", function( done ) {
-            nock( "http://localhost:8080" )
-            .matchHeader('Accept', 'application/json')
-            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
-            .matchHeader('Content-type', 'application/json')
-            .post( "/ag-push/rest/sender/" ).reply( 400,{} );
-
-            settings.applicationID = applicationID;
-            settings.masterSecret = masterSecret;
-
-            sender.send( message, settings, {} ).on( "error", function( error ) {
-                expect( error ).to.be.ok;
-                done();
-            });
-        });
-    });
-});
-
-describe( "Sender - send", function() {
-    var sender = AeroGear.Sender( url ),
-            applicationID = "12345",
-            masterSecret = "54321",
-            settings = {},
-            message = {};
-
-    beforeEach( function() {
-        settings = {};
-        message = {};
-    });
-
-
-    describe( "send Method with callback", function() {
+    describe( "send Method with callback with no options", function() {
         it( "send should be called with success", function( done ) {
 
             nock( "http://localhost:8080" )
@@ -166,26 +132,50 @@ describe( "Sender - send", function() {
             .post( "/ag-push/rest/sender/" )
             .reply( 200,{} );
 
-            settings.applicationID = applicationID;
-            settings.masterSecret = masterSecret;
-
-            sender.send( message, settings, function( err, response ) {
+            sender.send( message, function( err, response ) {
                 expect( response ).to.be.ok;
                 done();
             });
         });
 
-        it( "send should be called with error", function( done ) {
+        it( "send should be called with error with no options", function( done ) {
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
             .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
             .post( "/ag-push/rest/sender/" ).reply( 400,{} );
 
-            settings.applicationID = applicationID;
-            settings.masterSecret = masterSecret;
+            sender.send( message, function( err ) {
+                expect( err ).to.be.ok;
+                done();
+            });
+        });
+    });
 
-            sender.send( message, settings, function( err ) {
+    describe( "send Method with callback with empty options", function() {
+        it( "send should be called with success", function( done ) {
+
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/" )
+            .reply( 200,{} );
+
+            sender.send( message, {}, function( err, response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+
+        it( "send should be called with error with empty options", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/" ).reply( 400,{} );
+
+            sender.send( message, {}, function( err ) {
                 expect( err ).to.be.ok;
                 done();
             });
@@ -193,42 +183,16 @@ describe( "Sender - send", function() {
     });
 });
 
-describe( "Sender", function() {
-    var sender = AeroGear.Sender( url ),
-            applicationID = "12345",
-            masterSecret = "54321",
-            settings = {},
-            message = {};
-
-    beforeEach( function() {
-        settings = {};
-        message = {};
-    });
-    describe( "send - throw errors", function() {
-         it( "send should throw an error with no masterSecret", function() {
-            settings.applicationID = applicationID;
-            expect( function(){ sender.send( message, settings ); } ).to.throw( "UnifiedPushSenderError" );
-        });
-        it( "send should throw an error with no applicationID", function() {
-            settings.masterSecret = masterSecret;
-            expect( function(){ sender.send( message, settings ); } ).to.throw( "UnifiedPushSenderError" );
-        });
-        it( "send should throw an error with no applicationID and no masterSecret", function() {
-            settings.masterSecret = masterSecret;
-            expect( function(){ sender.send( message, settings ); } ).to.throw( "UnifiedPushSenderError" );
-        });
-    });
-});
-
 describe( "Sender - Handle Moved Status Codes", function() {
-    var sender = AeroGear.Sender( url ),
-            applicationID = "12345",
-            masterSecret = "54321",
-            settings = {},
-            message = {};
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        message = {};
 
     beforeEach( function() {
-        settings = {};
         message = {};
     });
 
@@ -244,10 +208,7 @@ describe( "Sender - Handle Moved Status Codes", function() {
             .post( "/rest/new/sender" )
             .reply( 200, {} );
 
-            settings.applicationID = applicationID;
-            settings.masterSecret = masterSecret;
-
-            sender.send( message, settings ).on( "success", function( response ) {
+            sender.send( message ).on( "success", function( response ) {
                 expect( response ).to.be.ok;
                 done();
             });
@@ -264,10 +225,7 @@ describe( "Sender - Handle Moved Status Codes", function() {
             .post( "/ag-push/rest/sender/" )
             .reply( 302,{},{} );
 
-            settings.applicationID = applicationID;
-            settings.masterSecret = masterSecret;
-
-            sender.send( message, settings ).on( "error", function( error ) {
+            sender.send( message ).on( "error", function( error ) {
                 expect( error ).to.be.ok;
                 expect( error ).to.equal( "redirect url is not available" );
                 done();
@@ -278,14 +236,15 @@ describe( "Sender - Handle Moved Status Codes", function() {
 
 
 describe( "Sender - Message Params", function() {
-    var sender = AeroGear.Sender( url ),
-            applicationID = "12345",
-            masterSecret = "54321",
-            settings = {},
-            message = {};
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        message = {};
 
     beforeEach( function() {
-        settings = {};
         message = {};
     });
 
@@ -305,16 +264,13 @@ describe( "Sender - Message Params", function() {
             })
             .reply( 200,{} );
 
-            settings.applicationID = applicationID;
-            settings.masterSecret = masterSecret;
-
             message = {
                 alert: "Hi",
                 sound: "default",
                 badge: 2
             };
 
-            sender.send( message, settings ).on( "success", function( response ) {
+            sender.send( message ).on( "success", function( response ) {
                 expect( response ).to.be.ok;
                 done();
             });
@@ -324,14 +280,15 @@ describe( "Sender - Message Params", function() {
 
 
 describe( "Sender - Message Params", function() {
-    var sender = AeroGear.Sender( url ),
-            applicationID = "12345",
-            masterSecret = "54321",
-            settings = {},
-            message = {};
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        message = {};
 
-    beforeEach( function() {
-        settings = {};
+    beforeEach( function() {;
         message = {};
     });
 
@@ -352,9 +309,6 @@ describe( "Sender - Message Params", function() {
             })
             .reply( 200,{} );
 
-            settings.applicationID = applicationID;
-            settings.masterSecret = masterSecret;
-
             message = {
                 alert: "Hi",
                 sound: "default",
@@ -363,7 +317,7 @@ describe( "Sender - Message Params", function() {
                 contentAvailable: true
             };
 
-            sender.send( message, settings ).on( "success", function( response ) {
+            sender.send( message ).on( "success", function( response ) {
                 expect( response ).to.be.ok;
                 done();
             });
@@ -373,19 +327,22 @@ describe( "Sender - Message Params", function() {
 
 
 describe( "Sender - Message Params", function() {
-    var sender = AeroGear.Sender( url ),
-            applicationID = "12345",
-            masterSecret = "54321",
-            settings = {},
-            message = {};
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        options = {},
+        message = {};
 
     beforeEach( function() {
-        settings = {};
+        options = {};
         message = {};
     });
 
     describe( "Message params", function() {
-        it( "send should be called with success with a proper message constructed for actionCategory and contentAvailable", function( done ) {
+        it( "send should be called with success with a proper options constructed for simplePush", function( done ) {
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
             .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
@@ -400,9 +357,7 @@ describe( "Sender - Message Params", function() {
             })
             .reply( 200,{} );
 
-            settings.applicationID = applicationID;
-            settings.masterSecret = masterSecret;
-            settings.simplePush = 'version=1';
+            options.simplePush = 'version=1';
 
             message = {
                 alert: "Hi",
@@ -410,7 +365,7 @@ describe( "Sender - Message Params", function() {
                 badge: 2
             };
 
-            sender.send( message, settings ).on( "success", function( response ) {
+            sender.send( message, options ).on( "success", function( response ) {
                 expect( response ).to.be.ok;
                 done();
             });

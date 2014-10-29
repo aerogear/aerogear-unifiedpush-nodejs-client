@@ -1,9 +1,10 @@
 var agSender = require( "./lib/unifiedpush-node-sender" ),
-    url = "http://localhost:8080/ag-push",
     message,
-    settings;
+    settings,
+    options;
 
 //Send a Message
+settings = require( "./settings.json" );
 
 message = {
     alert: "Hi",
@@ -13,9 +14,7 @@ message = {
     anotherCustomKey: "some other value"
 };
 
-settings = {
-    applicationID: "aa3cfaad-8cd4-4b3c-af23-08417b879d00",
-    masterSecret: "shhh",
+options = {
     ttl: 3600,
     simplePush: "version=123",
     criteria: {
@@ -24,7 +23,7 @@ settings = {
     }
 };
 
-agSender.Sender( url ).send( message, settings )
+agSender.Sender( settings ).send( message, options )
     .on( "success", function( response ) {
         console.log( "success called", response );
     })
@@ -34,7 +33,7 @@ agSender.Sender( url ).send( message, settings )
 
 
 // Or you can use just the callback
-agSender.Sender( url ).send( message, settings, function( err, response ) {
+agSender.Sender( settings ).send( message, options, function( err, response ) {
     if( err ) {
         console.log( err );
         return;
