@@ -43,20 +43,24 @@ install from npm
 Require the `unifiedpush-node-sender` library
 
     var agSender = require( "unifiedpush-node-sender" ),
-        url = "http://localhost:8080/ag-push";
+        settings = {
+            url: "http://localhost:8080/ag-push",
+            applicationId: "12345",
+            masterSecret: "123456"
+        };
 
 ### Send a Message
 
 You can use either listen for the success and error events
 
 
-    agSender.Sender( url ).send( message, settings ).on( "success", function( response ) {
+    agSender.Sender( settings ).send( message, options ).on( "success", function( response ) {
         console.log( "success called", response );
     });
 
 Or you can use a callback
 
-    agSender.Sender( url ).send( message, settings, function( err, response ) {
+    agSender.Sender( settings ).send( message, options, function( err, response ) {
         if( !err ) {
             console.log( "success called", response );
             return;
