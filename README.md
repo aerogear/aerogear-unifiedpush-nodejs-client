@@ -49,6 +49,20 @@ Require the `unifiedpush-node-sender` library
             masterSecret: "123456"
         };
 
+### Configuration with a JSON file
+
+Imaging the following `unifiedpush-config.json` file:
+
+    {
+      "url": "http://localhost:8080/ag-push",
+        "applicationId": "12345",
+        "masterSecret": "123456"
+    }
+
+Inside of the node.js code you use:
+
+	var agSender = require( "unifiedpush-node-sender" ), require( "./unifiedpush-config.json.json" );
+
 ### Send a Message
 
 You can use either listen for the success and error events
