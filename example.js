@@ -10,13 +10,17 @@ message = {
     alert: "Hi",
     sound: "default",
     badge: 2,
-    someKey: "some value",
-    anotherCustomKey: "some other value"
+    simplePush: "version=123",
+    userData: {
+        someKey: "some value",
+        anotherCustomKey: "some other value",
+    }
 };
 
 options = {
-    ttl: 3600,
-    simplePush: "version=123",
+    config: {
+        ttl: 3600,
+    },
     criteria: {
         variants: [ "1234", "56788" ],
         categories: [ "category1", "category2" ]

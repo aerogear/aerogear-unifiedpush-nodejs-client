@@ -342,28 +342,253 @@ describe( "Sender - Message Params", function() {
     });
 
     describe( "Message params", function() {
-        it( "send should be called with success with a proper options constructed for simplePush", function( done ) {
+        it( "send should be called with success with a proper message constructed for simplePush", function( done ) {
             nock( "http://localhost:8080" )
             .matchHeader('Accept', 'application/json')
             .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
             .post( "/ag-push/rest/sender/", {
-                "simple-push":"version=1",
                 message: {
                     alert: "Hi",
                     sound: "default",
-                    badge: 2
+                    badge: 2,
+                    "simple-push":"version=1"
                 }
             })
             .reply( 200,{} );
 
-            options.simplePush = 'version=1';
+            message = {
+                alert: "Hi",
+                sound: "default",
+                badge: 2,
+                simplePush: "version=1"
+            };
+
+            sender.send( message, options ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
+describe( "Sender - Message Params", function() {
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        options = {},
+        message = {};
+
+    beforeEach( function() {
+        options = {};
+        message = {};
+    });
+
+    describe( "Message params", function() {
+        it( "send should be called with success with a proper message constructed for user-data", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                message: {
+                    alert: "Hi",
+                    sound: "default",
+                    badge: 2,
+                    "user-data": {
+                        anotherKey: "Key"
+                    }
+                }
+            })
+            .reply( 200,{} );
 
             message = {
                 alert: "Hi",
                 sound: "default",
-                badge: 2
+                badge: 2,
+                userData: {
+                    anotherKey: "Key"
+                }
             };
+
+            sender.send( message, options ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
+describe( "Sender - Options Params", function() {
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        options = {},
+        message = {};
+
+    beforeEach( function() {
+        options = {};
+        message = {};
+    });
+
+    describe( "Option params", function() {
+        it( "send should be called with success with a proper options constructed with a config and no criteria", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                config: {
+                    ttl: 3600
+                },
+                message: {
+                    alert: "Hi",
+                    sound: "default",
+                    badge: 2,
+                    "simple-push":"version=1"
+                }
+            })
+            .reply( 200,{} );
+
+            message = {
+                alert: "Hi",
+                sound: "default",
+                badge: 2,
+                simplePush: "version=1"
+            };
+
+            options = {
+                config: {
+                    ttl: 3600
+                }
+            }
+
+            sender.send( message, options ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
+
+describe( "Sender - Options Params", function() {
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        options = {},
+        message = {};
+
+    beforeEach( function() {
+        options = {};
+        message = {};
+    });
+
+    describe( "Option params", function() {
+        it( "send should be called with success with a proper options constructed with a criteria and no config", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                criteria: {
+                    variants: [ "1234", "56788" ],
+                    categories: [ "category1", "category2" ]
+                },
+                message: {
+                    alert: "Hi",
+                    sound: "default",
+                    badge: 2,
+                    "simple-push":"version=1"
+                }
+            })
+            .reply( 200,{} );
+
+            message = {
+                alert: "Hi",
+                sound: "default",
+                badge: 2,
+                simplePush: "version=1"
+            };
+
+            options = {
+                criteria: {
+                    variants: [ "1234", "56788" ],
+                    categories: [ "category1", "category2" ]
+                }
+            }
+
+            sender.send( message, options ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
+describe( "Sender - Options Params", function() {
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        options = {},
+        message = {};
+
+    beforeEach( function() {
+        options = {};
+        message = {};
+    });
+
+    describe( "Option params", function() {
+        it( "send should be called with success with a proper options constructed with a criteria and a config", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                config: {
+                    ttl: 3600
+                },
+                criteria: {
+                    variants: [ "1234", "56788" ],
+                    categories: [ "category1", "category2" ]
+                },
+                message: {
+                    alert: "Hi",
+                    sound: "default",
+                    badge: 2,
+                    "simple-push":"version=1"
+                }
+            })
+            .reply( 200,{} );
+
+            message = {
+                alert: "Hi",
+                sound: "default",
+                badge: 2,
+                simplePush: "version=1"
+            };
+
+            options = {
+                config: {
+                    ttl: 3600
+                },
+                criteria: {
+                    variants: [ "1234", "56788" ],
+                    categories: [ "category1", "category2" ]
+                }
+            }
 
             sender.send( message, options ).on( "success", function( response ) {
                 expect( response ).to.be.ok;
