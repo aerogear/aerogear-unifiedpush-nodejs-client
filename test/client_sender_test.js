@@ -259,6 +259,8 @@ describe( "Sender - Message Params", function() {
                 message: {
                     alert: "Hi",
                     sound: "default",
+                    title: "Title",
+                    action: "Action",
                     badge: 2
                 }
             })
@@ -266,6 +268,8 @@ describe( "Sender - Message Params", function() {
 
             message = {
                 alert: "Hi",
+                title: "Title",
+                action: "Action",
                 sound: "default",
                 badge: 2
             };
@@ -315,6 +319,96 @@ describe( "Sender - Message Params", function() {
                 badge: 2,
                 actionCategory: "action",
                 contentAvailable: true
+            };
+
+            sender.send( message ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
+describe( "Sender - Message Params", function() {
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        message = {};
+
+    beforeEach( function() {;
+        message = {};
+    });
+
+    describe( "Message params", function() {
+        it( "send should be called with success with a proper message constructed for urlArgs", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                message: {
+                    alert: "Hi",
+                    sound: "default",
+                    badge: 2,
+                    "url-args": ["arg1", "arg2"]
+                }
+            })
+            .reply( 200,{} );
+
+            message = {
+                alert: "Hi",
+                sound: "default",
+                badge: 2,
+                urlArgs: ["arg1", "arg2"]
+            };
+
+            sender.send( message ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
+describe( "Sender - Message Params", function() {
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        message = {};
+
+    beforeEach( function() {;
+        message = {};
+    });
+
+    describe( "Message params", function() {
+        it( "send should be called with success with a proper message constructed for titleLocKey and titleLocArgs", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                message: {
+                    alert: "Hi",
+                    sound: "default",
+                    badge: 2,
+                    "title-loc-key": "value",
+                    "title-loc-args": ["arg1", "arg2"]
+                }
+            })
+            .reply( 200,{} );
+
+            message = {
+                alert: "Hi",
+                sound: "default",
+                badge: 2,
+                titleLocKey: "value",
+                titleLocArgs: ["arg1", "arg2"]
             };
 
             sender.send( message ).on( "success", function( response ) {
