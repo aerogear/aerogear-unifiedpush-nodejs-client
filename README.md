@@ -122,6 +122,8 @@ The Sender Class,  It is an `EventEmitter`
 
 `function (error) { }`
 
+For more information about the Unified Push Server's REST sender API, look [here](https://aerogear.org/docs/specs/aerogear-unifiedpush-rest/sender/index.html)
+
 ## Development
 
 If you would like to help develop AeroGear you can join our [developer's mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-dev), join #aerogear on Freenode, or shout at us on Twitter @aerogears.
