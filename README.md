@@ -76,9 +76,52 @@ Or you can use a callback
         }
     });
 
-## Documentation
+## API Documentation
 
-For more details about the current release, please consult [our documentation](https://aerogear.org/docs/unifiedpush/).
+### Class: Sender
+
+The Sender Class,  It is an `EventEmitter`
+
+### new Sender(settings)
+
+* `settings` Object
+    * `url` String
+    * `applicationId` String
+    * `masterSecret` String
+
+### sender.send([message], [options], [callback])
+
+* `message` Object
+    * `alert` String
+    * `actionCategory` String
+    * `sound` String
+    * `badge` String
+    * `simplePush` String
+    * `userData` Object
+    * `contentAvailable` Boolean
+
+* `options` Object
+
+* `options.config` Object
+    * `ttl` Number
+
+* `options.criteria` Object
+    * `alias` Array
+    * `deviceType` Array
+    * `categories` Array
+    * `variants` Array
+
+* `callback` Function
+
+
+
+### Event: 'success'
+
+`function () { }`
+
+### Event: 'error'
+
+`function (error) { }`
 
 ## Development
 
