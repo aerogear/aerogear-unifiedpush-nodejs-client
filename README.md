@@ -76,9 +76,53 @@ Or you can use a callback
         }
     });
 
-## Documentation
+## API Documentation
 
-For more details about the current release, please consult [our documentation](https://aerogear.org/docs/unifiedpush/).
+### Class: Sender
+
+The Sender Class,  It is an `EventEmitter`
+
+### new Sender(settings)
+
+* `settings` Object
+    * `url` String - The URL of the Unified Push Server.
+    * `applicationId` String - The id of an Application from the Unified Push Server
+    * `masterSecret` String - The master secret for that Application
+
+### sender.send([message], [options], [callback])
+
+* `message` Object
+    * `alert` String - message that will be displayed on the alert UI element
+    * `actionCategory` String -  the identifier of the action category for the interactive notification
+    * `sound` String - The name of a sound file
+    * `badge` String - The number to display as the badge of the app icon
+    * `simplePush` String - simplePush version number
+    * `userData` Object - any extra user data to be passed
+    * `contentAvailable` Boolean - Provide this key with a value of 1 to indicate that new content is available. iOS Only
+
+* `options` Object
+
+* `options.config` Object
+    * `ttl` Number - the time to live in seconds. This value is supported by APNs and GCM Only
+
+* `options.criteria` Object
+    * `alias` Array - a list of email or name strings
+    * `deviceType` Array - a list of device types as strings
+    * `categories` Array - a list of categories as strings
+    * `variants` Array - a list of variantID's as strings
+
+* `callback` Function
+
+
+### Event: 'success'
+
+`function () { }`
+
+### Event: 'error'
+
+`function (error) { }`
+
+For more information about the Unified Push Server's REST sender API, look [here](https://aerogear.org/docs/specs/aerogear-unifiedpush-rest/sender/index.html)
 
 ## Development
 
