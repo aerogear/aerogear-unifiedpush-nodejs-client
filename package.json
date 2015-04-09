@@ -30,9 +30,11 @@
     "sinon": "~1.7.3",
     "sinon-chai": "~2.4.0",
     "mocha": "~1.12.1",
-    "nock": "~0.22.1"
+    "nock": "~0.22.1",
+    "nsp": "*"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "prepublish": "nsp audit-package"
   }
 }
