@@ -93,17 +93,27 @@ The Sender Class,  It is an `EventEmitter`
 
 * `message` Object
     * `alert` String - message that will be displayed on the alert UI element
+    * `sound` String - The name of a sound file
+    * `badge` String - The number to display as the badge of the app icon
+    * `simplePush` String - simplePush version number
+    * `userData` Object - any extra user data to be passed
+
+* `message.apns` Object
     * `title` String - A short string describing the purpose of the notification.
     * `action` String - The label of the action button
     * `urlArgs` Array - an array of values that are paired with the placeholders inside the urlFormatString value of your website.json file. Safari Only
     * `titleLocKey` String - The key to a title string in the Localizable.strings file for the current localization. iOS Only
     * `titleLocArgs` Array - Variable string values to appear in place of the format specifiers in title-loc-key. iOS Only
     * `actionCategory` String - the identifier of the action category for the interactive notification
-    * `sound` String - The name of a sound file
-    * `badge` String - The number to display as the badge of the app icon
-    * `simplePush` String - simplePush version number
-    * `userData` Object - any extra user data to be passed
     * `contentAvailable` Boolean - Provide this key with a value of 1 to indicate that new content is available. iOS Only
+
+* `message.windows` Object
+    * `title` String -
+    * `duration` String -
+    * `badge` String -
+    * `tileType` String -
+    * `images` Array -
+    * `textFields` Array -
 
 * `options` Object
 

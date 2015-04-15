@@ -307,8 +307,10 @@ describe( "Sender - Message Params", function() {
                     alert: "Hi",
                     sound: "default",
                     badge: 2,
-                    "action-category": "action",
-                    "content-available": true
+                    apns: {
+                        "action-category": "action",
+                        "content-available": true
+                    }
                 }
             })
             .reply( 200,{} );
@@ -317,8 +319,10 @@ describe( "Sender - Message Params", function() {
                 alert: "Hi",
                 sound: "default",
                 badge: 2,
-                actionCategory: "action",
-                contentAvailable: true
+                apns: {
+                    actionCategory: "action",
+                    contentAvailable: true
+                }
             };
 
             sender.send( message ).on( "success", function( response ) {
@@ -353,7 +357,9 @@ describe( "Sender - Message Params", function() {
                     alert: "Hi",
                     sound: "default",
                     badge: 2,
-                    "url-args": ["arg1", "arg2"]
+                    apns: {
+                        "url-args": ["arg1", "arg2"]
+                    }
                 }
             })
             .reply( 200,{} );
@@ -362,7 +368,9 @@ describe( "Sender - Message Params", function() {
                 alert: "Hi",
                 sound: "default",
                 badge: 2,
-                urlArgs: ["arg1", "arg2"]
+                apns: {
+                    urlArgs: ["arg1", "arg2"]
+                }
             };
 
             sender.send( message ).on( "success", function( response ) {
@@ -397,8 +405,10 @@ describe( "Sender - Message Params", function() {
                     alert: "Hi",
                     sound: "default",
                     badge: 2,
-                    "title-loc-key": "value",
-                    "title-loc-args": ["arg1", "arg2"]
+                    apns: {
+                        "title-loc-key": "value",
+                        "title-loc-args": ["arg1", "arg2"]
+                    }
                 }
             })
             .reply( 200,{} );
@@ -407,8 +417,10 @@ describe( "Sender - Message Params", function() {
                 alert: "Hi",
                 sound: "default",
                 badge: 2,
-                titleLocKey: "value",
-                titleLocArgs: ["arg1", "arg2"]
+                apns: {
+                    titleLocKey: "value",
+                    titleLocArgs: ["arg1", "arg2"]
+                }
             };
 
             sender.send( message ).on( "success", function( response ) {
@@ -509,6 +521,62 @@ describe( "Sender - Message Params", function() {
             };
 
             sender.send( message, options ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
+describe( "Sender - Message Params", function() {
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        message = {};
+
+    beforeEach( function() {;
+        message = {};
+    });
+
+    describe( "Message params Windows and APNS", function() {
+        it( "send should be called with success with a proper message constructed for actionCategory and contentAvailable and not camel case windows stuff", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                message: {
+                    alert: "Hi",
+                    sound: "default",
+                    badge: 2,
+                    apns: {
+                        "action-category": "action",
+                        "content-available": true
+                    },
+                    windows: {
+                        tileType: "CoolBeansType"
+                    }
+                }
+            })
+            .reply( 200,{} );
+
+            message = {
+                alert: "Hi",
+                sound: "default",
+                badge: 2,
+                apns: {
+                    actionCategory: "action",
+                    contentAvailable: true
+                },
+                windows: {
+                    tileType: "CoolBeansType"
+                }
+            };
+
+            sender.send( message ).on( "success", function( response ) {
                 expect( response ).to.be.ok;
                 done();
             });
