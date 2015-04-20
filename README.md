@@ -135,6 +135,12 @@ If you would like to help develop AeroGear you can join our [developer's mailing
 
 Also takes some time and skim the [contributor guide](http://aerogear.org/docs/guides/Contributing/)
 
+#### Generate Documentation
+
+The code is documented in JSDoc and can be generated in `docs` folder by running:
+
+`npm run-script docs`
+
 ## Questions?
 
 Join our [user mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-users) for any questions or help! We really hope you enjoy app development with AeroGear!

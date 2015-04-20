@@ -34,10 +34,12 @@
     "sinon-chai": "~2.4.0",
     "mocha": "~1.12.1",
     "nock": "~0.22.1",
-    "nsp": "*"
+    "nsp": "*",
+    "jsdoc-aerogear": "~3.2.0-dev"
   },
   "scripts": {
     "test": "mocha",
-    "prepublish": "nsp audit-package"
+    "prepublish": "nsp audit-package",
+    "docs": "jsdoc-aerogear lib/ -r -d docs README.md"
   }
 }
