@@ -108,12 +108,12 @@ The Sender Class,  It is an `EventEmitter`
     * `contentAvailable` Boolean - Provide this key with a value of 1 to indicate that new content is available. iOS Only
 
 * `message.windows` Object
-    * `title` String -
-    * `duration` String -
-    * `badge` String -
-    * `tileType` String -
-    * `images` Array -
-    * `textFields` Array -
+    * `type` String - The type of message to send toast, raw, badge or tile.
+    * `duration` String - Duration a Toast message is displayed 'long' or 'short'
+    * `badge` String - Badge notifications type for badges that are not numbers (none, activity, alert, available, away, busy, newMessage, paused, playing, unavailable, error or attention), for numbers use the value in the main part of the message.
+    * `tileType` String - Different type of tile messages with different sizes see the [tile template catalog]{@link https://msdn.microsoft.com/en-us/library/windows/apps/hh761491.aspx} e.g. 'TileSquareText02' or 'TileWideBlockAndText02'
+    * `images` Array - Images either local or remote need match the nubmer of the tileType
+    * `textFields` Array - Texts needs to be same as the number of the tileType
 
 * `options` Object
 
