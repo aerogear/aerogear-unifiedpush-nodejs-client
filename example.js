@@ -36,7 +36,36 @@ agSender.Sender( settings ).send( message, options )
     });
 
 
-// Or you can use just the callback
+// A slightly more complex message example
+
+message = {
+    "alert": "HELLO!",
+    "sound": "default",
+    "badge": 2,
+    "user-data": {
+        "key": "value",
+        "key2": "other value"
+    },
+    "windows": {
+        "type": "tile",
+        "duration": "short",
+        "badge": "alert",
+        "tileType": "TileWideBlockAndText01",
+        "images": ["Assets/test.jpg", "Assets/background.png"],
+        "textFields": ["foreground text"]
+    },
+    "apns": {
+        "title" : "someTitle",
+        "action-category": "some value",
+        "content-available": true,
+        "action" : "someAction",
+        "url-args" :["args1","arg2"],
+        "localized-title-key" : "some value",
+        "localized-title-arguments" : ["args1","arg2"]
+    }
+};
+
+//you can also use just the callback pattern
 agSender.Sender( settings ).send( message, options, function( err, response ) {
     if( err ) {
         console.log( err );
