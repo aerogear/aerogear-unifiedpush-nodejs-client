@@ -417,3 +417,106 @@ describe( "Sender - Message Params", function() {
         });
     });
 });
+
+describe( "Sender - Settings Params", function() {
+    var sender = AeroGear.Sender( url ),
+            applicationID = "12345",
+            masterSecret = "54321",
+            settings = {},
+            message = {};
+
+    beforeEach( function() {
+        settings = {};
+        message = {};
+    });
+
+
+    describe( "Settins params", function() {
+        it( "send should be called with success with a proper message constructed with settings that have blank arrays", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                message: {
+                    alert: "Hi",
+                    sound: "default",
+                    badge: 2
+                }
+            })
+            .reply( 200,{} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+
+            message = {
+                alert: "Hi",
+                sound: "default",
+                badge: 2
+            };
+
+            settings.criteria = {
+                alias: [],
+                variants: []
+            };
+
+            sender.send( message, settings ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
+
+describe( "Sender - Settings Params", function() {
+    var sender = AeroGear.Sender( url ),
+            applicationID = "12345",
+            masterSecret = "54321",
+            settings = {},
+            message = {};
+
+    beforeEach( function() {
+        settings = {};
+        message = {};
+    });
+
+
+    describe( "Settins params", function() {
+        it( "send should be called with success with a proper message constructed with settings that have blank arrays and filled in arrays", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                categories: ['one', 'two'],
+                message: {
+                    alert: "Hi",
+                    sound: "default",
+                    badge: 2
+                }
+            })
+            .reply( 200,{} );
+
+            settings.applicationID = applicationID;
+            settings.masterSecret = masterSecret;
+
+            message = {
+                alert: "Hi",
+                sound: "default",
+                badge: 2
+            };
+
+            settings.criteria = {
+                alias: [],
+                variants: [],
+                categories: ['one', 'two']
+            };
+
+            sender.send( message, settings ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
