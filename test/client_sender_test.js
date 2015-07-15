@@ -759,3 +759,103 @@ describe( "Sender - Options Params", function() {
         });
     });
 });
+
+describe( "Sender - Options Params", function() {
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        options = {},
+        message = {};
+
+    beforeEach( function() {
+        options = {};
+        message = {};
+    });
+
+    describe( "Option params", function() {
+        it( "send should be called with success with a proper options constructed with a criteria and a criteria with empty array values", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                criteria: {
+                },
+                message: {
+                    alert: "Hi"
+                }
+            })
+            .reply( 200,{} );
+
+            message = {
+                alert: "Hi"
+            };
+
+            options = {
+                criteria: {
+                    variants: [],
+                    categories: []
+                }
+            };
+
+            sender.send( message, options ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
+
+describe( "Sender - Options Params", function() {
+    var settings = {
+            url: 'http://localhost:8080/ag-push',
+            applicationId: '1234',
+            masterSecret: '1234'
+        },
+        sender = AeroGear.Sender( settings ),
+        options = {},
+        message = {};
+
+    beforeEach( function() {
+        options = {};
+        message = {};
+    });
+
+    describe( "Option params", function() {
+        it( "send should be called with success with a proper options constructed with a criteria and a criteria with empty array values and real values", function( done ) {
+            nock( "http://localhost:8080" )
+            .matchHeader('Accept', 'application/json')
+            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+            .matchHeader('Content-type', 'application/json')
+            .post( "/ag-push/rest/sender/", {
+                criteria: {
+                    alias: ['1', '2']
+                },
+                message: {
+                    alert: "Hi"
+                }
+            })
+            .reply( 200,{} );
+
+            message = {
+                alert: "Hi"
+            };
+
+            options = {
+                criteria: {
+                    variants: [],
+                    categories: [],
+                    alias: ['1', '2']
+                }
+            };
+
+            sender.send( message, options ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});
