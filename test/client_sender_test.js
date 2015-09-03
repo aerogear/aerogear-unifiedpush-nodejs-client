@@ -859,3 +859,53 @@ describe( "Sender - Options Params", function() {
         });
     });
 });
+
+
+
+
+describe( "Sender - Header Settings", function() {
+    var settings = {
+          url: 'http://localhost:8080/ag-push',
+          applicationId: '1234',
+          masterSecret: '1234',
+          headers: {
+              'X-Custom-Header': 'RainbowCat',
+              'aerogear-sender': 'Custom Sender'
+          }
+      },
+      sender = AeroGear.Sender( settings ),
+      options = {},
+      message = {};
+
+    beforeEach( function() {
+        options = {};
+        message = {};
+    });
+
+    describe( "Option params", function() {
+        it( "send should be called with success with a proper options constructed with a criteria and a criteria with empty array values and real values", function( done ) {
+            nock( "http://localhost:8080" )
+              .matchHeader('Accept', 'application/json')
+              .matchHeader('aerogear-sender', 'Custom Sender')
+              .matchHeader('Content-type', 'application/json')
+              .matchHeader('X-Custom-Header', 'RainbowCat')
+              .post( "/ag-push/rest/sender/", {
+                  message: {
+                      alert: "Hi"
+                  }
+              })
+              .reply( 200,{} );
+
+            message = {
+                alert: "Hi"
+            };
+
+            options = {};
+
+            sender.send( message, options ).on( "success", function( response ) {
+                expect( response ).to.be.ok;
+                done();
+            });
+        });
+    });
+});

@@ -41,5 +41,8 @@
     "test": "mocha",
     "prepublish": "nsp audit-package",
     "docs": "jsdoc-aerogear lib/ -r -d docs README.md"
+  },
+  "dependencies": {
+    "lodash": "3.10.1"
   }
 }

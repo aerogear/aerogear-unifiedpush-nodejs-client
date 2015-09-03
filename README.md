@@ -88,6 +88,7 @@ The Sender Class,  It is an `EventEmitter`
     * `url` String - The URL of the Unified Push Server.
     * `applicationId` String - The id of an Application from the Unified Push Server
     * `masterSecret` String - The master secret for that Application
+    * `headers` Object - The hash of custom HTTP headers / header overrides
 
 ### sender.send([message], [options], [callback])
 
