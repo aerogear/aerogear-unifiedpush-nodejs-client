@@ -2,6 +2,8 @@
 
 Node Sender API for the AeroGear Unified Push server
 
+_note: This version of the sender is compatible with the 1.1.x series of the UnifiedPush Server_
+
 |                 | Project Info  |
 | --------------- | ------------- |
 | License:        | Apache License, Version 2.0  |
