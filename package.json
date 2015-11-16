@@ -39,7 +39,7 @@
   },
   "scripts": {
     "test": "mocha",
-    "prepublish": "nsp audit-package",
+    "prepublish": "./node_modules/nsp/bin/nsp check",
     "docs": "jsdoc-aerogear lib/ -r -d docs README.md"
   },
   "dependencies": {
