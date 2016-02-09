@@ -98,7 +98,8 @@ describe( "Sender - send", function() {
             .matchHeader('Accept', 'application/json')
             .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
-            .post( "/ag-push/rest/sender/" ).reply( 400,{} );
+            .post( "/ag-push/rest/sender/" )
+            .replyWithError(400);
 
             sender.send( message, {} ).on( "error", function( error ) {
                 expect( error ).to.be.ok;
@@ -143,11 +144,12 @@ describe( "Sender - send", function() {
             .matchHeader('Accept', 'application/json')
             .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
-            .post( "/ag-push/rest/sender/" ).reply( 400,{} );
+            .post( "/ag-push/rest/sender/" ).replyWithError(400);
 
             sender.send( message, function( err ) {
-                expect( err ).to.be.ok;
-                done();
+                if (err) {
+                    done();
+                }
             });
         });
     });
@@ -173,7 +175,7 @@ describe( "Sender - send", function() {
             .matchHeader('Accept', 'application/json')
             .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
             .matchHeader('Content-type', 'application/json')
-            .post( "/ag-push/rest/sender/" ).reply( 400,{} );
+            .post( "/ag-push/rest/sender/" ).replyWithError(400);
 
             sender.send( message, {}, function( err ) {
                 expect( err ).to.be.ok;
@@ -214,26 +216,7 @@ describe( "Sender - Handle Moved Status Codes", function() {
             });
         });
     });
-
-    describe( "Endpoint returns moved, with no new location", function() {
-        it( "send should be called with error", function( done ) {
-
-            nock( "http://localhost:8080" )
-            .matchHeader('Accept', 'application/json')
-            .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
-            .matchHeader('Content-type', 'application/json')
-            .post( "/ag-push/rest/sender/" )
-            .reply( 302,{},{} );
-
-            sender.send( message ).on( "error", function( error ) {
-                expect( error ).to.be.ok;
-                expect( error ).to.equal( "redirect url is not available" );
-                done();
-            });
-        });
-    });
 });
-
 
 describe( "Sender - Message Params", function() {
     var settings = {
@@ -390,7 +373,7 @@ describe( "Sender - Message Params", function() {
         sender = AeroGear.Sender( settings ),
         message = {};
 
-    beforeEach( function() {;
+    beforeEach( function() {
         message = {};
     });
 

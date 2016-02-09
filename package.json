@@ -33,7 +33,7 @@
     "sinon": "~1.7.3",
     "sinon-chai": "~2.4.0",
     "mocha": "~1.12.1",
-    "nock": "~0.22.1",
+    "nock": "~7.0.2",
     "nsp": "*",
     "jsdoc-aerogear": "~3.2.0-dev"
   },
@@ -43,6 +43,7 @@
     "docs": "jsdoc-aerogear lib/ -r -d docs README.md"
   },
   "dependencies": {
-    "lodash": "3.10.1"
+    "lodash": "3.10.1",
+    "request": "^2.69.0"
   }
 }
