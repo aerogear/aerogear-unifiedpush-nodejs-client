@@ -96,6 +96,7 @@ The Sender Class,  It is an `EventEmitter`
 
 * `message` Object
     * `alert` String - message that will be displayed on the alert UI element
+    * `priority` String - sets a processing priority on a push message. values can be 'normal' or 'high'
     * `sound` String - The name of a sound file
     * `badge` String - The number to display as the badge of the app icon
     * `simplePush` String - simplePush version number
