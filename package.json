@@ -17,10 +17,10 @@
     "url": "git@github.com:aerogear/aerogear-unifiedpush-nodejs-client.git"
   },
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4.0.0"
   },
   "bugs": {
-    "url": "https://issues.jboss.org/browse/AGJS"
+    "url": "https://issues.jboss.org/browse/AGPUSH"
   },
   "licenses": [
     {
