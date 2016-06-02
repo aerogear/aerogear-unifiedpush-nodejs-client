@@ -7,7 +7,7 @@
     "name": "Red Hat, Inc.",
     "url": "http://aerogear.org"
   },
-  "main": "lib/unifiedpush-node-sender",
+  "main": "index.js",
   "maintainers": {
     "name": "Lucas Holmquist",
     "email": "lholmqui@redhat.com"
@@ -29,21 +29,24 @@
     }
   ],
   "devDependencies": {
-    "chai": "~1.7.2",
-    "sinon": "~1.7.3",
-    "sinon-chai": "~2.4.0",
-    "mocha": "~1.12.1",
-    "nock": "~7.0.2",
-    "nsp": "*",
-    "jsdoc-aerogear": "~3.2.0-dev"
+    "coveralls": "^2.11.9",
+    "istanbul": "^0.4.3",
+    "jsdoc-aerogear": "^3.2.0-dev",
+    "jshint": "^2.9.2",
+    "nock": "^8.0.0",
+    "nsp": "^2.4.0",
+    "proxyquire": "^1.7.9",
+    "tape": "^4.5.1"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "tape test/*-test.js",
+    "lint": "jshint index.js lib/*.js test/*-test.js",
     "prepublish": "./node_modules/nsp/bin/nsp check",
-    "docs": "jsdoc-aerogear lib/ -r -d docs README.md"
+    "coverage": "./node_modules/.bin/istanbul cover tape -- test/*-test.js",
+    "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
+    "ci": "npm run lint && npm run coveralls"
   },
   "dependencies": {
-    "lodash": "3.10.1",
-    "request": "^2.69.0"
+    "request": "^2.72.0"
   }
 }
