@@ -1,4 +1,4 @@
-# unifiedpush-node-sender [![Build Status](https://secure.travis-ci.org/aerogear/aerogear-unifiedpush-nodejs-client.png?branch=master)](https://travis-ci.org/aerogear/aerogear-unifiedpush-nodejs-client)
+# unifiedpush-node-sender [![Build Status](https://secure.travis-ci.org/aerogear/aerogear-unifiedpush-nodejs-client.png?branch=master)](https://travis-ci.org/aerogear/aerogear-unifiedpush-nodejs-client) [![Coverage Status](https://coveralls.io/repos/github/aerogear/aerogear-unifiedpush-nodejs-client/badge.svg?branch=master)](https://coveralls.io/github/aerogear/aerogear-unifiedpush-nodejs-client?branch=master)
 
 Node Sender API for the AeroGear Unified Push server
 
