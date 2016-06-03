@@ -53,38 +53,32 @@ install from npm
 
 Require the `unifiedpush-node-sender` library
 
-    var agSender = require( "unifiedpush-node-sender" ),
-        settings = {
-            url: "http://localhost:8080/ag-push",
-            applicationId: "12345",
-            masterSecret: "123456"
-        };
+    const agSender = require('unifiedpush-node-sender');
+
+    const settings = {
+        url: 'http://localhost:8080/ag-push',
+        applicationId: '12345',
+        masterSecret: '123456'
+    };
 
 ### Send a Message
 
-You can use either listen for the success and error events
+First get a handle on the `client` object,  then use the `client.sender.send` method to send a message
 
 
-    agSender.Sender( settings ).send( message, options ).on( "success", function( response ) {
-        console.log( "success called", response );
-    });
-
-Or you can use a callback
-
-    agSender.Sender( settings ).send( message, options, function( err, response ) {
-        if( !err ) {
-            console.log( "success called", response );
-            return;
-        }
+    agSender(settings).then((client) => {
+        client.sender.send(message, options).then((response) => {
+            console.log('success', response);
+        })
     });
 
 ## API Documentation
 
 ### Class: Sender
 
-The Sender Class,  It is an `EventEmitter`
+The Sender Class, It returns a Promise with the `client` object
 
-### new Sender(settings)
+### Sender(settings)
 
 * `settings` Object
     * `url` String - The URL of the Unified Push Server.
@@ -92,7 +86,7 @@ The Sender Class,  It is an `EventEmitter`
     * `masterSecret` String - The master secret for that Application
     * `headers` Object - The hash of custom HTTP headers / header overrides
 
-### sender.send([message], [options], [callback])
+### client.sender.send([message], [options])
 
 * `message` Object
     * `alert` String - message that will be displayed on the alert UI element
@@ -130,16 +124,14 @@ The Sender Class,  It is an `EventEmitter`
     * `categories` Array - a list of categories as strings
     * `variants` Array - a list of variantID's as strings
 
-* `callback` Function
 
+## Changes from 0.12.0 to 0.13.0
 
-### Event: 'success'
+0.13.0 is pretty much a complete re-write of the client.  It now only returns Promises.
 
-`function () { }`
+It also require at least node 4.x or greater.
 
-### Event: 'error'
-
-`function (error) { }`
+The way in which the `send` method is invoked has changed also.  Check out the example above to see the new way of using this library
 
 For more information about the Unified Push Server's REST sender API, look [here](https://aerogear.org/docs/specs/aerogear-unifiedpush-rest/sender/index.html)
 
