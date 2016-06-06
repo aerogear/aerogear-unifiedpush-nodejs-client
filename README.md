@@ -145,7 +145,7 @@ Also takes some time and skim the [contributor guide](http://aerogear.org/docs/g
 
 The code is documented in JSDoc and can be generated in `docs` folder by running:
 
-`npm run-script docs`
+`npm run docs`
 
 ## Questions?
 
