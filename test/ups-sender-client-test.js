@@ -37,7 +37,7 @@ test('test senderClient url with trailing slash', (t) => {
 
 test('test senderClient should reject when no settings', (t) => {
     agSender().catch((err) => {
-        t.equal(err, 'UnifiedPushSenderError', 'should return a promise rejection when missing the applicationId');
+        t.equal(err, 'settings must contain valid url, applicationId, and masterSecret', 'should return a promise rejection when missing the applicationId');
         t.end();
     });
 });
@@ -49,7 +49,7 @@ test('test senderClient should reject when applicationId setting', (t) => {
     };
 
     agSender(settings).catch((err) => {
-        t.equal(err, 'UnifiedPushSenderError', 'should return a promise rejection when missing the applicationId');
+        t.equal(err, 'settings must contain valid url, applicationId, and masterSecret', 'should return a promise rejection when missing the applicationId');
         t.end();
     });
 });
@@ -61,7 +61,7 @@ test('test senderClient should reject when masterSecret setting', (t) => {
     };
 
     agSender(settings).catch((err) => {
-        t.equal(err, 'UnifiedPushSenderError', 'should return a promise rejection when missing the masterSecert');
+        t.equal(err, 'settings must contain valid url, applicationId, and masterSecret', 'should return a promise rejection when missing the masterSecert');
         t.end();
     });
 });
