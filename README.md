@@ -125,6 +125,10 @@ The Sender Class, It returns a Promise with the `client` object
     * `variants` Array - a list of variantID's as strings
 
 
+## Changes from 0.13.0 to 0.14.0
+
+Promise rejections now return proper `Error` objects - [3f1a2a1](https://github.com/aerogear/aerogear-unifiedpush-nodejs-client/pull/27). Thanks (evanshortiss)[https://github.com/evanshortiss]
+
 ## Changes from 0.12.0 to 0.13.0
 
 0.13.0 is pretty much a complete re-write of the client.  It now only returns Promises.
