@@ -47,7 +47,7 @@ test('test send success - no options', (t) => {
     });
 });
 
-test('test send failure', (t) => {
+test('test send failure with non 200 response', (t) => {
     nock('http://localhost:8080')
         .matchHeader('Accept', 'application/json')
         .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
@@ -56,7 +56,27 @@ test('test send failure', (t) => {
         .reply(400);
 
     sender().then((client) => {
-        client.sender.send({}, {}).catch(() => {
+        client.sender.send({}, {}).catch((err) => {
+            t.assert(err instanceof Error);
+            t.assert(err.toString().includes('UPS request returned status code: 400'));
+            t.pass('should be in the catch');
+            t.end();
+        });
+    });
+});
+
+test('test send failure such as connection refused', (t) => {
+    nock('http://localhost:8080')
+        .matchHeader('Accept', 'application/json')
+        .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+        .matchHeader('Content-type', 'application/json')
+        .post('/ag-push/rest/sender/')
+        .replyWithError(new Error('ECONNREFUSED'));
+
+    sender().then((client) => {
+        client.sender.send({}, {}).catch((err) => {
+            t.assert(err instanceof Error);
+            t.assert(err.toString().includes('Problem with UPS Request: ECONNREFUSED'));
             t.pass('should be in the catch');
             t.end();
         });

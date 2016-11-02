@@ -73,7 +73,7 @@ test('test senderClient should reject when url setting', (t) => {
     };
 
     agSender(settings).catch((err) => {
-        t.equal(err, 'UnifiedPushSenderError', 'should return a promise rejection when missing the url');
+        t.equal(err, 'settings must contain valid url, applicationId, and masterSecret', 'should return a promise rejection when missing the url');
         t.end();
     });
 });
