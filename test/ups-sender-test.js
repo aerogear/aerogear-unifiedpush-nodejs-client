@@ -21,7 +21,7 @@ test('test send success', (t) => {
         .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
         .matchHeader('Content-type', 'application/json')
         .post('/ag-push/rest/sender/')
-        .reply(200, {});
+        .reply(202, {});
 
     sender().then((client) => {
         client.sender.send({}, {}).then(() => {
@@ -37,7 +37,7 @@ test('test send success - no options', (t) => {
         .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
         .matchHeader('Content-type', 'application/json')
         .post('/ag-push/rest/sender/')
-        .reply(200, {});
+        .reply(202, {});
 
     sender().then((client) => {
         client.sender.send({}).then(() => {
@@ -47,7 +47,7 @@ test('test send success - no options', (t) => {
     });
 });
 
-test('test send failure with non 200 response', (t) => {
+test('test send failure with non 202 response', (t) => {
     nock('http://localhost:8080')
         .matchHeader('Accept', 'application/json')
         .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
@@ -97,7 +97,7 @@ test('test proper message constructed - success', (t) => {
                 badge: 2
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi',
@@ -131,7 +131,7 @@ test('test message construction for actionCategory and contentAvailable', (t) =>
                 }
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi',
@@ -166,7 +166,7 @@ test('send should be called with success with a proper message constructed for u
                 }
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi',
@@ -201,7 +201,7 @@ test('send should be called with success with a proper message constructed for t
                 }
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi',
@@ -234,7 +234,7 @@ test('send should be called with success with a proper message constructed for s
                 'simple-push':'version=1'
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi',
@@ -266,7 +266,7 @@ test('send should be called with success with a proper message constructed for u
                 }
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi',
@@ -304,7 +304,7 @@ test('send should be called with success with a proper message constructed for a
                 }
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi',
@@ -340,7 +340,7 @@ test('send should be called with success with a proper message with a priority a
                 priority: 'normal'
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi',
@@ -373,7 +373,7 @@ test('send should be called with success with a proper options constructed with 
                 'simple-push':'version=1'
             }
         })
-        .reply( 200,{} );
+        .reply( 202,{} );
 
     const message = {
         alert: 'Hi',
@@ -413,7 +413,7 @@ test('send should be called with success with a proper options constructed with 
                 'simple-push':'version=1'
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi',
@@ -457,7 +457,7 @@ test('send should be called with success with a proper options constructed with 
                 'simple-push':'version=1'
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi',
@@ -496,7 +496,7 @@ test('send should be called with success with a proper options constructed with 
                 alert: 'Hi'
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi'
@@ -530,7 +530,7 @@ test('send should be called with success with a proper options constructed with 
                 alert: 'Hi'
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi'
@@ -573,7 +573,7 @@ test('testing custom headers', (t) => {
                 alert: 'Hi'
             }
         })
-        .reply(200, {});
+        .reply(202, {});
 
     const message = {
         alert: 'Hi'
