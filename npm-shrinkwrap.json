@@ -1,6 +1,6 @@
 {
   "name": "unifiedpush-node-sender",
-  "version": "0.14.0",
+  "version": "0.14.1",
   "dependencies": {
     "request": {
       "version": "2.74.0",
