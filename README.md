@@ -124,6 +124,9 @@ The Sender Class, It returns a Promise with the `client` object
     * `categories` Array - a list of categories as strings
     * `variants` Array - a list of variantID's as strings
 
+## Changes from 0.14.0 to 0.14.1
+
+There was a bug in the send method.  The UPS was sending back a 202, but we were looking for a 200, therefore all promises were rejecting.  Oops
 
 ## Changes from 0.13.0 to 0.14.0
 
