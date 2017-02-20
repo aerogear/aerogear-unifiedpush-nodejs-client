@@ -226,12 +226,12 @@ test('send should be called with success with a proper message constructed for s
         .matchHeader('Accept', 'application/json')
         .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
         .matchHeader('Content-type', 'application/json')
-        .post( '/ag-push/rest/sender/', {
+        .post('/ag-push/rest/sender/', {
             message: {
                 alert: 'Hi',
                 sound: 'default',
                 badge: 2,
-                'simple-push':'version=1'
+                'simple-push': 'version=1'
             }
         })
         .reply(202, {});
@@ -290,7 +290,7 @@ test('send should be called with success with a proper message constructed for a
         .matchHeader('Accept', 'application/json')
         .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
         .matchHeader('Content-type', 'application/json')
-        .post( '/ag-push/rest/sender/', {
+        .post('/ag-push/rest/sender/', {
             message: {
                 alert: 'Hi',
                 sound: 'default',
@@ -358,11 +358,11 @@ test('send should be called with success with a proper message with a priority a
 });
 
 test('send should be called with success with a proper options constructed with a config and no criteria', (t) => {
-    nock( 'http://localhost:8080' )
+    nock('http://localhost:8080')
         .matchHeader('Accept', 'application/json')
         .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
         .matchHeader('Content-type', 'application/json')
-        .post( '/ag-push/rest/sender/', {
+        .post('/ag-push/rest/sender/', {
             config: {
                 ttl: 3600
             },
@@ -370,10 +370,10 @@ test('send should be called with success with a proper options constructed with 
                 alert: 'Hi',
                 sound: 'default',
                 badge: 2,
-                'simple-push':'version=1'
+                'simple-push': 'version=1'
             }
         })
-        .reply( 202,{} );
+        .reply(202, {});
 
     const message = {
         alert: 'Hi',
@@ -401,7 +401,7 @@ test('send should be called with success with a proper options constructed with 
         .matchHeader('Accept', 'application/json')
         .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
         .matchHeader('Content-type', 'application/json')
-        .post( '/ag-push/rest/sender/', {
+        .post('/ag-push/rest/sender/', {
             criteria: {
                 variants: ['1234', '56788'],
                 categories: ['category1', 'category2']
@@ -410,7 +410,7 @@ test('send should be called with success with a proper options constructed with 
                 alert: 'Hi',
                 sound: 'default',
                 badge: 2,
-                'simple-push':'version=1'
+                'simple-push': 'version=1'
             }
         })
         .reply(202, {});
@@ -454,7 +454,7 @@ test('send should be called with success with a proper options constructed with 
                 alert: 'Hi',
                 sound: 'default',
                 badge: 2,
-                'simple-push':'version=1'
+                'simple-push': 'version=1'
             }
         })
         .reply(202, {});
@@ -581,6 +581,54 @@ test('testing custom headers', (t) => {
 
     agSender(settings).then((client) => {
         client.sender.send(message).then(() => {
+            t.pass('should be ok');
+            t.end();
+        });
+    });
+});
+
+test('send should be called with success with an array of messages', (t) => {
+    const body = [
+        {
+            criteria: { alias: ['1'] },
+            message: { alert: 'Hi 1' }
+        },
+        {
+            criteria: { alias: ['2'] },
+            message: { alert: 'Hi 2' }
+        },
+        {
+            criteria: { alias: ['3'] },
+            message: { alert: 'Hi 3' }
+        }
+    ];
+
+    nock('http://localhost:8080')
+        .matchHeader('Accept', 'application/json')
+        .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
+        .matchHeader('Content-type', 'application/json')
+        .post('/ag-push/rest/sender/', body)
+        .reply(202, {});
+
+    const messages = [
+        {
+            message: { alert: 'Hi 1' },
+            options: { alias: ['1'] }
+        },
+        {
+            message: { alert: 'Hi 2' },
+            options: { alias: ['2'] }
+        },
+        {
+            message: { alert: 'Hi 3' },
+            options: { alias: ['3'] }
+        }
+    ];
+    console.log("HELLO 1");
+
+    sender().then((client) => {
+        client.sender.send(messages).then(() => {
+            console.log("HELLO");
             t.pass('should be ok');
             t.end();
         });
