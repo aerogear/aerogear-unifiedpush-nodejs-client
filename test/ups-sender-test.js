@@ -626,7 +626,7 @@ test('send should be called with success with an array of messages', (t) => {
     ];
 
     sender().then((client) => {
-        client.sender.send(messages).then(() => {
+        client.sender.sendBatch(messages).then(() => {
             t.pass('should be ok');
             t.end();
         });
