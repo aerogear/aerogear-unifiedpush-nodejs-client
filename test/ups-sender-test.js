@@ -27,6 +27,9 @@ test('test send success', (t) => {
         client.sender.send({}, {}).then(() => {
             t.pass('response is ok');
             t.end();
+        }).catch(err => {
+            t.fail(err);
+            t.end();
         });
     });
 });
@@ -42,6 +45,9 @@ test('test send success - no options', (t) => {
     sender().then((client) => {
         client.sender.send({}).then(() => {
             t.pass('response is ok');
+            t.end();
+        }).catch(err => {
+            t.fail(err);
             t.end();
         });
     });
@@ -111,6 +117,9 @@ test('test proper message constructed - success', (t) => {
         client.sender.send(message).then(() => {
             t.pass('should be ok');
             t.end();
+        }).catch(err => {
+            t.fail(err);
+            t.end();
         });
     });
 });
@@ -147,6 +156,9 @@ test('test message construction for actionCategory and contentAvailable', (t) =>
         client.sender.send(message).then(() => {
             t.pass('should be ok');
             t.end();
+        }).catch(err => {
+            t.fail(err);
+            t.end();
         });
     });
 });
@@ -180,6 +192,9 @@ test('send should be called with success with a proper message constructed for u
     sender().then((client) => {
         client.sender.send(message).then(() => {
             t.pass('should be ok');
+            t.end();
+        }).catch(err => {
+            t.fail(err);
             t.end();
         });
     });
@@ -217,35 +232,8 @@ test('send should be called with success with a proper message constructed for t
         client.sender.send(message).then(() => {
             t.pass('should be ok');
             t.end();
-        });
-    });
-});
-
-test('send should be called with success with a proper message constructed for simplePush', (t) => {
-    nock('http://localhost:8080')
-        .matchHeader('Accept', 'application/json')
-        .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
-        .matchHeader('Content-type', 'application/json')
-        .post('/ag-push/rest/sender/', {
-            message: {
-                alert: 'Hi',
-                sound: 'default',
-                badge: 2,
-                'simple-push': 'version=1'
-            }
-        })
-        .reply(202, {});
-
-    const message = {
-        alert: 'Hi',
-        sound: 'default',
-        badge: 2,
-        simplePush: 'version=1'
-    };
-
-    sender().then((client) => {
-        client.sender.send(message).then(() => {
-            t.pass('should be ok');
+        }).catch(err => {
+            t.fail(err);
             t.end();
         });
     });
@@ -280,6 +268,9 @@ test('send should be called with success with a proper message constructed for u
     sender().then((client) => {
         client.sender.send(message).then(() => {
             t.pass('should be ok');
+            t.end();
+        }).catch(err => {
+            t.fail(err);
             t.end();
         });
     });
@@ -323,6 +314,9 @@ test('send should be called with success with a proper message constructed for a
         client.sender.send(message).then(() => {
             t.pass('should be ok');
             t.end();
+        }).catch(err => {
+            t.fail(err);
+            t.end();
         });
     });
 });
@@ -353,6 +347,9 @@ test('send should be called with success with a proper message with a priority a
         client.sender.send(message).then(() => {
             t.pass('should be ok');
             t.end();
+        }).catch(err => {
+            t.fail(err);
+            t.end();
         });
     });
 });
@@ -369,8 +366,7 @@ test('send should be called with success with a proper options constructed with 
             message: {
                 alert: 'Hi',
                 sound: 'default',
-                badge: 2,
-                'simple-push': 'version=1'
+                badge: 2
             }
         })
         .reply(202, {});
@@ -392,6 +388,9 @@ test('send should be called with success with a proper options constructed with 
         client.sender.send(message, options).then(() => {
             t.pass('should be ok');
             t.end();
+        }).catch(err => {
+            t.fail(err);
+            t.end();
         });
     });
 });
@@ -409,8 +408,7 @@ test('send should be called with success with a proper options constructed with 
             message: {
                 alert: 'Hi',
                 sound: 'default',
-                badge: 2,
-                'simple-push': 'version=1'
+                badge: 2
             }
         })
         .reply(202, {});
@@ -433,6 +431,9 @@ test('send should be called with success with a proper options constructed with 
         client.sender.send(message, options).then(() => {
             t.pass('should be ok');
             t.end();
+        }).catch(err => {
+            t.fail(err);
+            t.end();
         });
     });
 });
@@ -453,8 +454,7 @@ test('send should be called with success with a proper options constructed with 
             message: {
                 alert: 'Hi',
                 sound: 'default',
-                badge: 2,
-                'simple-push': 'version=1'
+                badge: 2
             }
         })
         .reply(202, {});
@@ -479,6 +479,9 @@ test('send should be called with success with a proper options constructed with 
     sender().then((client) => {
         client.sender.send(message, options).then(() => {
             t.pass('should be ok');
+            t.end();
+        }).catch(err => {
+            t.fail(err);
             t.end();
         });
     });
@@ -512,6 +515,9 @@ test('send should be called with success with a proper options constructed with 
     sender().then((client) => {
         client.sender.send(message, options).then(() => {
             t.pass('should be ok');
+            t.end();
+        }).catch(err => {
+            t.fail(err);
             t.end();
         });
     });
@@ -548,6 +554,9 @@ test('send should be called with success with a proper options constructed with 
         client.sender.send(message, options).then(() => {
             t.pass('should be ok');
             t.end();
+        }).catch(err => {
+            t.fail(err);
+            t.end();
         });
     });
 });
@@ -583,11 +592,14 @@ test('testing custom headers', (t) => {
         client.sender.send(message).then(() => {
             t.pass('should be ok');
             t.end();
+        }).catch(err => {
+            t.fail(err);
+            t.end();
         });
     });
 });
 
-test('send should be called with success with an array of messages', (t) => {
+test('sendBatch should be called with success with an array of messages', (t) => {
     const body = [
         {
             criteria: { alias: ['1'] },
@@ -613,21 +625,30 @@ test('send should be called with success with an array of messages', (t) => {
     const messages = [
         {
             message: { alert: 'Hi 1' },
-            options: { alias: ['1'] }
+            options: {
+                criteria: { alias: ['1'] }
+            }
         },
         {
             message: { alert: 'Hi 2' },
-            options: { alias: ['2'] }
+            options: {
+                criteria: { alias: ['2'] }
+            }
         },
         {
             message: { alert: 'Hi 3' },
-            options: { alias: ['3'] }
+            options: {
+                criteria: { alias: ['3'] }
+            }
         }
     ];
 
     sender().then((client) => {
         client.sender.sendBatch(messages).then(() => {
             t.pass('should be ok');
+            t.end();
+        }).catch(err => {
+            t.fail(err);
             t.end();
         });
     });
