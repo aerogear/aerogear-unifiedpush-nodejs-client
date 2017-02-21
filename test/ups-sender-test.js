@@ -619,7 +619,7 @@ test('sendBatch should be called with success with an array of messages', (t) =>
         .matchHeader('Accept', 'application/json')
         .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
         .matchHeader('Content-type', 'application/json')
-        .post('/ag-push/rest/sender/batch', body)
+        .post('/ag-push/rest/sender/batch/', body)
         .reply(202, {});
 
     const messages = [
