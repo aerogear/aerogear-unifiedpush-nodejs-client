@@ -607,7 +607,7 @@ test('send should be called with success with an array of messages', (t) => {
         .matchHeader('Accept', 'application/json')
         .matchHeader('aerogear-sender', 'AeroGear Node.js Sender')
         .matchHeader('Content-type', 'application/json')
-        .post('/ag-push/rest/sender/', body)
+        .post('/ag-push/rest/sender/batch', body)
         .reply(202, {});
 
     const messages = [
@@ -624,11 +624,9 @@ test('send should be called with success with an array of messages', (t) => {
             options: { alias: ['3'] }
         }
     ];
-    console.log("HELLO 1");
 
     sender().then((client) => {
         client.sender.send(messages).then(() => {
-            console.log("HELLO");
             t.pass('should be ok');
             t.end();
         });
