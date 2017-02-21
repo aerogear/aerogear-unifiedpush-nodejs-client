@@ -72,6 +72,16 @@ First get a handle on the `client` object,  then use the `client.sender.send` me
         })
     });
 
+### Send a Batch of messages
+Similar to the `send` method but passing an array of `{message, options}` objects as parameter instead.
+
+
+    agSender(settings).then((client) => {
+        client.sender.sendBatch(messages).then((response) => {
+            console.log('success', response);
+        })
+    });
+
 ## API Documentation
 
 ### Class: Sender
@@ -93,7 +103,6 @@ The Sender Class, It returns a Promise with the `client` object
     * `priority` String - sets a processing priority on a push message. values can be 'normal' or 'high'
     * `sound` String - The name of a sound file
     * `badge` String - The number to display as the badge of the app icon
-    * `simplePush` String - simplePush version number
     * `userData` Object - any extra user data to be passed
 
 * `message.apns` Object

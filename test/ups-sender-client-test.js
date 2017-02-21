@@ -19,6 +19,9 @@ test('test senderClient should return a Promise with the client object', (t) => 
 
         t.equals(typeof client.sender.send, 'function', 'should have the send function');
         t.end();
+    }).catch(err => {
+        t.fail(err);
+        t.end();
     });
 });
 
@@ -31,6 +34,9 @@ test('test senderClient url with trailing slash', (t) => {
 
     agSender(settings).then((client) => {
         t.equal(client.url, 'http://localhost:8080/ag-push/rest/sender/', 'client should have a url value of settings.url');
+        t.end();
+    }).catch(err => {
+        t.fail(err);
         t.end();
     });
 });
