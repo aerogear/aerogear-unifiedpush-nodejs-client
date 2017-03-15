@@ -1,6 +1,6 @@
 {
   "name": "unifiedpush-node-sender",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "dependencies": {
     "ajv": {
       "version": "4.11.5",
