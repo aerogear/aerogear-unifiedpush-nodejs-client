@@ -18,7 +18,7 @@ jobs:
           command: npm run coverage
       - run:
           name: send coverage report to coveralls
-          command: cat ./coverage/lcov.info | coveralls
+          command: cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
 
 workflows:
   version: 2
