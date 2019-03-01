@@ -366,7 +366,8 @@ test('send should be called with success with a proper options constructed with 
             message: {
                 alert: 'Hi',
                 sound: 'default',
-                badge: 2
+                badge: 2,
+                simplePush: 'version=1'
             }
         })
         .reply(202, {});
@@ -408,7 +409,8 @@ test('send should be called with success with a proper options constructed with 
             message: {
                 alert: 'Hi',
                 sound: 'default',
-                badge: 2
+                badge: 2,
+                simplePush: 'version=1'
             }
         })
         .reply(202, {});
@@ -454,7 +456,8 @@ test('send should be called with success with a proper options constructed with 
             message: {
                 alert: 'Hi',
                 sound: 'default',
-                badge: 2
+                badge: 2,
+                simplePush: 'version=1'
             }
         })
         .reply(202, {});
