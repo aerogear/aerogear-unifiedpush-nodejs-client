@@ -29,26 +29,24 @@
     }
   ],
   "devDependencies": {
-    "coveralls": "^2.11.9",
+    "coveralls": "^3.0.3",
     "ink-docstrap": "^1.2.1",
     "istanbul": "^0.4.3",
     "jsdoc": "^3.4.0",
     "jshint": "^2.9.2",
-    "nock": "^8.0.0",
-    "nsp": "^2.4.0",
+    "nock": "^9.6.1",
     "proxyquire": "^1.7.9",
     "tape": "^4.5.1"
   },
   "scripts": {
     "test": "tape test/*-test.js",
     "lint": "jshint index.js lib/*.js test/*-test.js",
-    "prepublish": "./node_modules/nsp/bin/nsp check",
     "coverage": "./node_modules/.bin/istanbul cover tape -- test/*-test.js",
     "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls",
     "ci": "npm run lint && npm run coveralls",
     "docs": "./node_modules/.bin/jsdoc --verbose -d docs -t ./node_modules/ink-docstrap/template -R README.md index.js ./lib/sender.js ./lib/unifiedpush-node-sender.js"
   },
   "dependencies": {
-    "request": "^2.81.0"
+    "request": "^2.88.0"
   }
 }

@@ -1,0 +1,95 @@
+version: 2
+jobs:
+  test-node-4:
+    working_directory: ~/aerogear
+    docker:
+      - image: circleci/node:4
+    steps:
+      - checkout
+      - run:
+          name: install-dependencies
+          command: npm install
+      - run:
+          name: run lint
+          command: npm run lint
+      - run:
+          name: run coverage
+          command: npm run coverage
+      - run:
+          name: send coverage report to coveralls
+          command: cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+  test-node-6:
+    working_directory: ~/aerogear
+    docker:
+      - image: circleci/node:6
+    steps:
+      - checkout
+      - run:
+          name: install-dependencies
+          command: npm install
+      - run:
+          name: run lint
+          command: npm run lint
+      - run:
+          name: run coverage
+          command: npm run coverage
+      - run:
+          name: send coverage report to coveralls
+          command: cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+  test-node-8:
+    working_directory: ~/aerogear
+    docker:
+      - image: circleci/node:8
+    steps:
+      - checkout
+      - run:
+          name: install-dependencies
+          command: npm install
+      - run:
+          name: run lint
+          command: npm run lint
+      - run:
+          name: run coverage
+          command: npm run coverage
+      - run:
+          name: send coverage report to coveralls
+          command: cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+  test-node-10:
+    working_directory: ~/aerogear
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: install-dependencies
+          command: npm install
+      - run:
+          name: run lint
+          command: npm run lint
+      - run:
+          name: run coverage
+          command: npm run coverage
+      - run:
+          name: send coverage report to coveralls
+          command: cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+
+workflows:
+  version: 2
+  build_and_release:
+    jobs:
+      - test-node-4:
+          filters:
+            tags:
+              only: /.*/
+      - test-node-6:
+          filters:
+            tags:
+              only: /.*/
+      - test-node-8:
+          filters:
+            tags:
+              only: /.*/
+      - test-node-10:
+          filters:
+            tags:
+              only: /.*/
