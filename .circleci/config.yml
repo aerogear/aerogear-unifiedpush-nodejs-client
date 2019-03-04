@@ -72,6 +72,18 @@ jobs:
       - run:
           name: send coverage report to coveralls
           command: cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+  npm_publish:
+    working_directory: ~/aerogear
+    docker:
+      # Node 8 LTS
+      - image: circleci/node:lts
+    steps:
+      - checkout
+        # Allows us to authenticate with the npm registry
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run: CI=true npm run release:prep
+      - run: TAG=$CIRCLE_TAG npm run release:validate
+      - run: TAG=$CIRCLE_TAG npm run publish
 
 workflows:
   version: 2
@@ -93,3 +105,14 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - npm_publish:
+          requires:
+            - test-node-4
+            - test-node-6
+            - test-node-8
+            - test-node-10
+          filters:
+            tags:
+              only: /.*/ # allow anything because tag syntax is validated as part of validate-release.sh
+            branches:
+              ignore: /.*/
