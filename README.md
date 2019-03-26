@@ -1,8 +1,13 @@
-# unifiedpush-node-sender [![CircleCI](https://circleci.com/gh/aerogear/aerogear-unifiedpush-nodejs-client.svg?style=svg)](https://circleci.com/gh/aerogear/aerogear-unifiedpush-nodejs-client) [![Coverage Status](https://coveralls.io/repos/github/aerogear/aerogear-unifiedpush-nodejs-client/badge.svg?branch=master)](https://coveralls.io/github/aerogear/aerogear-unifiedpush-nodejs-client?branch=master)
+# AeroGear UnifiedPush Node.js Client
+
+[![CircleCI](https://img.shields.io/circleci/project/github/aerogear/aerogear-unifiedpush-nodejs-client/master.svg)](https://circleci.com/gh/aerogear/aerogear-unifiedpush-nodejs-client) 
+[![Coverage Status](https://img.shields.io/coveralls/github/aerogear/aerogear-unifiedpush-nodejs-client.svg)](https://coveralls.io/github/aerogear/aerogear-unifiedpush-nodejs-client)
+[![npm](https://img.shields.io/npm/v/unifiedpush-node-sender.svg)](https://www.npmjs.com/package/unifiedpush-node-sender)
+[![License](https://img.shields.io/badge/-Apache%202.0-blue.svg)](https://opensource.org/s/Apache-2.0)
 
 Node Sender API for the AeroGear Unified Push server
 
-_note: This version of the sender is compatible with the 1.1.x series of the UnifiedPush Server_
+> This version of the sender is compatible with the 1.1.x series of the UnifiedPush Server_
 
 |                 | Project Info  |
 | --------------- | ------------- |
