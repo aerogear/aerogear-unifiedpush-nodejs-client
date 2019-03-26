@@ -9,14 +9,15 @@ Node Sender API for the AeroGear Unified Push server
 
 > This version of the sender is compatible with the 1.1.x series of the UnifiedPush Server_
 
-|                 | Project Info  |
-| --------------- | ------------- |
-| License:        | Apache License, Version 2.0  |
-| Build:          | npm  |
-| Documentation:  | https://aerogear.org/push/  |
-| Issue tracker:  | https://issues.jboss.org/browse/AGPUSH  |
-| Mailing lists:  | [aerogear-users](http://aerogear-users.1116366.n5.nabble.com/) ([subscribe](https://lists.jboss.org/mailman/listinfo/aerogear-users))  |
-|                 | [aerogear-dev](http://aerogear-dev.1069024.n5.nabble.com/) ([subscribe](https://lists.jboss.org/mailman/listinfo/aerogear-dev))  |
+|                          | Project Info                                            |
+| ------------------------ | ------------------------------------------------------- |
+| License:                 | Apache License, Version 2.0                             |
+| Build:                   | npm                                                     |
+| End User Documentation:  | https://docs.aerogear.org                               |
+| Community Documentation: | https://aerogear.org                                    |
+| Issue tracker:           | https://issues.jboss.org/browse/AEROGEAR                |
+| Mailing lists:           | https://groups.google.com/forum/#!forum/aerogear        |
+
 
 ## Getting Started
 
