@@ -111,22 +111,14 @@ The Sender Class, It returns a Promise with the `client` object
     * `categories` Array - a list of categories as strings
     * `variants` Array - a list of variantID's as strings
 
-## Development
+## License 
 
-If you would like to help develop AeroGear you can join our [developer's mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-dev), join #aerogear on Freenode, or shout at us on Twitter @aerogears.
-
-Also takes some time and skim the [contributor guide](http://aerogear.org/docs/guides/Contributing/)
-
-#### Generate Documentation
-
-The code is documented in JSDoc and can be generated in `docs` folder by running:
-
-`npm run docs`
+See [LICENSE file](./LICENSE.txt)
 
 ## Questions?
 
-Join our [user mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-users) for any questions or help! We really hope you enjoy app development with AeroGear!
+Join our [user mailing list](https://groups.google.com/forum/#!forum/aerogear) for any questions or help! We really hope you enjoy app development with AeroGear.
 
 ## Found a bug?
 
-If you found a bug please create a ticket for us on [Jira](https://issues.jboss.org/browse/AGPUSH) with some steps to reproduce it.
+If you found a bug please create a ticket for us on [Jira](https://issues.jboss.org/browse/AEROGEAR) with some steps to reproduce it.
