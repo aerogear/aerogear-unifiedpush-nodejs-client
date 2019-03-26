@@ -111,24 +111,6 @@ The Sender Class, It returns a Promise with the `client` object
     * `categories` Array - a list of categories as strings
     * `variants` Array - a list of variantID's as strings
 
-## Changes from 0.14.0 to 0.14.1
-
-There was a bug in the send method.  The UPS was sending back a 202, but we were looking for a 200, therefore all promises were rejecting.  Oops
-
-## Changes from 0.13.0 to 0.14.0
-
-Promise rejections now return proper `Error` objects - [3f1a2a1](https://github.com/aerogear/aerogear-unifiedpush-nodejs-client/pull/27). Thanks (evanshortiss)[https://github.com/evanshortiss]
-
-## Changes from 0.12.0 to 0.13.0
-
-0.13.0 is pretty much a complete re-write of the client.  It now only returns Promises.
-
-It also require at least node 4.x or greater.
-
-The way in which the `send` method is invoked has changed also.  Check out the example above to see the new way of using this library
-
-For more information about the Unified Push Server's REST sender API, look [here](https://aerogear.org/docs/specs/aerogear-unifiedpush-rest/sender/index.html)
-
 ## Development
 
 If you would like to help develop AeroGear you can join our [developer's mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-dev), join #aerogear on Freenode, or shout at us on Twitter @aerogears.
