@@ -18,75 +18,47 @@ Node Sender API for the AeroGear Unified Push server
 | Issue tracker:           | https://issues.jboss.org/browse/AEROGEAR                |
 | Mailing lists:           | https://groups.google.com/forum/#!forum/aerogear        |
 
-
 ## Getting Started
 
-### Pre Reqs:
-* node.js
-* npm
-* git
+Add the dependency to your project:
 
-### Building
+```bash
+npm i unifiedpush-node-sender
+```
 
-clone and install:
+## Usage
 
-    $ git@github.com:aerogear/aerogear-unifiedpush-nodejs-client.git
+Create a sender
 
-    $ cd aerogear-unifiedpush-nodejs-client
+```javascript
+const agSender = require('unifiedpush-node-sender');
 
-    $ npm install
+const settings = {
+    url: '<pushServerURL e.g http(s)//host:port/context>',
+    applicationId: '<pushApplicationId e.g. 1234456-234320>',
+    masterSecret: '<masterSecret e.g. 1234456-234320>'
+};
+```    
 
-### Running Tests
+First get a handle on the `client` object, then use the `client.sender.send` method to send a message
 
-    $ npm test
+```javascript
+agSender(settings).then((client) => {
+    client.sender.send(message, options).then((response) => {
+        console.log('success', response);
+    })
+});
+```    
 
-
-### Add to a Project
-
-In your project do
-
-    npm install path/to/aerogear-unified-push-node-client
-
-or
-
-install from npm
-
-    npm install unifiedpush-node-sender
-
-
-
-## Examples
-
-Require the `unifiedpush-node-sender` library
-
-    const agSender = require('unifiedpush-node-sender');
-
-    const settings = {
-        url: 'http://localhost:8080/ag-push',
-        applicationId: '12345',
-        masterSecret: '123456'
-    };
-
-### Send a Message
-
-First get a handle on the `client` object,  then use the `client.sender.send` method to send a message
-
-
-    agSender(settings).then((client) => {
-        client.sender.send(message, options).then((response) => {
-            console.log('success', response);
-        })
-    });
-
-### Send a Batch of messages
 Similar to the `send` method but passing an array of `{message, options}` objects as parameter instead.
 
-
-    agSender(settings).then((client) => {
-        client.sender.sendBatch(messages).then((response) => {
-            console.log('success', response);
-        })
-    });
+```javascript
+agSender(settings).then((client) => {
+    client.sender.sendBatch(messages).then((response) => {
+        console.log('success', response);
+    })
+});
+```
 
 ## API Documentation
 
