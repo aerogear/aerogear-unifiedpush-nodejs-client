@@ -1,86 +1,64 @@
-# unifiedpush-node-sender [![CircleCI](https://circleci.com/gh/aerogear/aerogear-unifiedpush-nodejs-client.svg?style=svg)](https://circleci.com/gh/aerogear/aerogear-unifiedpush-nodejs-client) [![Coverage Status](https://coveralls.io/repos/github/aerogear/aerogear-unifiedpush-nodejs-client/badge.svg?branch=master)](https://coveralls.io/github/aerogear/aerogear-unifiedpush-nodejs-client?branch=master)
+# AeroGear UnifiedPush Node.js Client
+
+[![CircleCI](https://img.shields.io/circleci/project/github/aerogear/aerogear-unifiedpush-nodejs-client/master.svg)](https://circleci.com/gh/aerogear/aerogear-unifiedpush-nodejs-client) 
+[![Coverage Status](https://img.shields.io/coveralls/github/aerogear/aerogear-unifiedpush-nodejs-client.svg)](https://coveralls.io/github/aerogear/aerogear-unifiedpush-nodejs-client)
+[![npm](https://img.shields.io/npm/v/unifiedpush-node-sender.svg)](https://www.npmjs.com/package/unifiedpush-node-sender)
+[![License](https://img.shields.io/badge/-Apache%202.0-blue.svg)](https://opensource.org/s/Apache-2.0)
 
 Node Sender API for the AeroGear Unified Push server
 
-_note: This version of the sender is compatible with the 1.1.x series of the UnifiedPush Server_
+> This version of the sender is compatible with the 1.1.x series of the UnifiedPush Server_
 
-|                 | Project Info  |
-| --------------- | ------------- |
-| License:        | Apache License, Version 2.0  |
-| Build:          | npm  |
-| Documentation:  | https://aerogear.org/push/  |
-| Issue tracker:  | https://issues.jboss.org/browse/AGPUSH  |
-| Mailing lists:  | [aerogear-users](http://aerogear-users.1116366.n5.nabble.com/) ([subscribe](https://lists.jboss.org/mailman/listinfo/aerogear-users))  |
-|                 | [aerogear-dev](http://aerogear-dev.1069024.n5.nabble.com/) ([subscribe](https://lists.jboss.org/mailman/listinfo/aerogear-dev))  |
+|                          | Project Info                                            |
+| ------------------------ | ------------------------------------------------------- |
+| License:                 | Apache License, Version 2.0                             |
+| Build:                   | npm                                                     |
+| End User Documentation:  | https://docs.aerogear.org                               |
+| Community Documentation: | https://aerogear.org                                    |
+| Issue tracker:           | https://issues.jboss.org/browse/AEROGEAR                |
+| Mailing lists:           | https://groups.google.com/forum/#!forum/aerogear        |
 
 ## Getting Started
 
-### Pre Reqs:
-* node.js
-* npm
-* git
+Add the dependency to your project:
 
-### Building
+```bash
+npm i unifiedpush-node-sender
+```
 
-clone and install:
+## Usage
 
-    $ git@github.com:aerogear/aerogear-unifiedpush-nodejs-client.git
+Create a sender
 
-    $ cd aerogear-unifiedpush-nodejs-client
+```javascript
+const agSender = require('unifiedpush-node-sender');
 
-    $ npm install
+const settings = {
+    url: '<pushServerURL e.g http(s)//host:port/context>',
+    applicationId: '<pushApplicationId e.g. 1234456-234320>',
+    masterSecret: '<masterSecret e.g. 1234456-234320>'
+};
+```    
 
-### Running Tests
+First get a handle on the `client` object, then use the `client.sender.send` method to send a message
 
-    $ npm test
+```javascript
+agSender(settings).then((client) => {
+    client.sender.send(message, options).then((response) => {
+        console.log('success', response);
+    })
+});
+```    
 
-
-### Add to a Project
-
-In your project do
-
-    npm install path/to/aerogear-unified-push-node-client
-
-or
-
-install from npm
-
-    npm install unifiedpush-node-sender
-
-
-
-## Examples
-
-Require the `unifiedpush-node-sender` library
-
-    const agSender = require('unifiedpush-node-sender');
-
-    const settings = {
-        url: 'http://localhost:8080/ag-push',
-        applicationId: '12345',
-        masterSecret: '123456'
-    };
-
-### Send a Message
-
-First get a handle on the `client` object,  then use the `client.sender.send` method to send a message
-
-
-    agSender(settings).then((client) => {
-        client.sender.send(message, options).then((response) => {
-            console.log('success', response);
-        })
-    });
-
-### Send a Batch of messages
 Similar to the `send` method but passing an array of `{message, options}` objects as parameter instead.
 
-
-    agSender(settings).then((client) => {
-        client.sender.sendBatch(messages).then((response) => {
-            console.log('success', response);
-        })
-    });
+```javascript
+agSender(settings).then((client) => {
+    client.sender.sendBatch(messages).then((response) => {
+        console.log('success', response);
+    })
+});
+```
 
 ## API Documentation
 
@@ -133,40 +111,14 @@ The Sender Class, It returns a Promise with the `client` object
     * `categories` Array - a list of categories as strings
     * `variants` Array - a list of variantID's as strings
 
-## Changes from 0.14.0 to 0.14.1
+## License 
 
-There was a bug in the send method.  The UPS was sending back a 202, but we were looking for a 200, therefore all promises were rejecting.  Oops
-
-## Changes from 0.13.0 to 0.14.0
-
-Promise rejections now return proper `Error` objects - [3f1a2a1](https://github.com/aerogear/aerogear-unifiedpush-nodejs-client/pull/27). Thanks (evanshortiss)[https://github.com/evanshortiss]
-
-## Changes from 0.12.0 to 0.13.0
-
-0.13.0 is pretty much a complete re-write of the client.  It now only returns Promises.
-
-It also require at least node 4.x or greater.
-
-The way in which the `send` method is invoked has changed also.  Check out the example above to see the new way of using this library
-
-For more information about the Unified Push Server's REST sender API, look [here](https://aerogear.org/docs/specs/aerogear-unifiedpush-rest/sender/index.html)
-
-## Development
-
-If you would like to help develop AeroGear you can join our [developer's mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-dev), join #aerogear on Freenode, or shout at us on Twitter @aerogears.
-
-Also takes some time and skim the [contributor guide](http://aerogear.org/docs/guides/Contributing/)
-
-#### Generate Documentation
-
-The code is documented in JSDoc and can be generated in `docs` folder by running:
-
-`npm run docs`
+See [LICENSE file](./LICENSE.txt)
 
 ## Questions?
 
-Join our [user mailing list](https://lists.jboss.org/mailman/listinfo/aerogear-users) for any questions or help! We really hope you enjoy app development with AeroGear!
+Join our [user mailing list](https://groups.google.com/forum/#!forum/aerogear) for any questions or help! We really hope you enjoy app development with AeroGear.
 
 ## Found a bug?
 
-If you found a bug please create a ticket for us on [Jira](https://issues.jboss.org/browse/AGPUSH) with some steps to reproduce it.
+If you found a bug please create a ticket for us on [Jira](https://issues.jboss.org/browse/AEROGEAR) with some steps to reproduce it.
