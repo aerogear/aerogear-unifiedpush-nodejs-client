@@ -47,7 +47,8 @@
     "docs": "./node_modules/.bin/jsdoc --verbose -d docs -t ./node_modules/ink-docstrap/template -R README.md index.js ./lib/sender.js ./lib/unifiedpush-node-sender.js",
     "release:prep": "./scripts/prepareRelease.sh",
     "release:validate": "./scripts/validateRelease.sh",
-    "publish": "./scripts/publishRelease.sh"
+    "publish:release": "./scripts/publishRelease.sh",
+    "version:master": "./scripts/versionMaster.sh"
   },
   "dependencies": {
     "request": "^2.88.0"
